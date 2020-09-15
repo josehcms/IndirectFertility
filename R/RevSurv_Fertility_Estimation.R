@@ -14,7 +14,8 @@ graphics.off( )
 # List of packages for session
 .packages <-  
   c( "rlang", "data.table", "RODBC", "lubridate", 
-     "devtools", "tictoc", "dplyr", "RCurl" )
+     "devtools", "tictoc", "dplyr", "RCurl",
+     "ungroup" )
 
 # Install CRAN packages (if not already installed)
 .inst <- .packages %in% installed.packages()
@@ -37,7 +38,7 @@ options( unpd_server = "https://popdiv.dfs.un.org/DemoData/api/" )
 
 ### Read UNPD data from server #------------------
 
-myLocations <- c(76,32)
+myLocations <- c( 76 )
 
 # Loop through each location with `lapply`
 # This is useful if you want to work with many locations because 
@@ -92,54 +93,224 @@ myPop <-
     return( resFilt )
 })
 
-# Merge all separate country data frames into
-# one data frame.
-Population1 <- data.table(do.call(rbind, myPop))
+# Merge all separate country data frames into one data frame
+pop_data <- data.table( do.call( rbind, myPop ) )
 
 # check sex tabulation
-Population1[,.(LocID,SeriesID,SexID)] %>% unique %>% .[,.N,.(LocID,SeriesID)]
+pop_data[, .( LocID, SeriesID, SexID ) ] %>% unique %>% .[,.N,.( LocID, SeriesID ) ]
 
 # adjust date format
-Population1[, DateFormtd := TimeStart %>% as.Date( '%d/%m/%Y' ) ]
+pop_data[, DateFormtd := TimeStart %>% as.Date( '%d/%m/%Y' ) ]
+
 # female filter
-fem <- Population1[ SexID == 2 & AgeLabel %in% 10:69 ]
-fem[,.(LocID,SeriesID,AgeLabel)] %>% unique %>% .[,.N,.(LocID,SeriesID)] # number of groups
-fem[, AgeAbrgd := cut( AgeLabel %>% as.numeric, 
+pop_females <- pop_data[ SexID == 2 & AgeLabel %in% 10:69 ]
+
+check_age_females <- 
+  lapply( pop_females$SeriesID %>% unique, function( x ){
+    aux <- 
+      pop_females[SeriesID == x ,
+                  .( LocID, SeriesID, AgeLabel ) ] %>% 
+      unique %>% 
+      .[ , .N, .( LocID, SeriesID ) ]
+  
+    aux$Select <- aux$N == 60 
+    
+    return( aux )
+} )
+
+filterSeriesFem <- 
+  do.call( rbind, check_age_females )[ Select == TRUE ]
+
+# number of groups
+pop_females[, AgeAbrgd := cut( AgeLabel %>% as.numeric, 
                        breaks = seq( 10, 70, 5 ),
                        labels = seq( 10, 65, 5 ),
                        right  = F,
                        include.lowest = TRUE ) %>% paste0 %>% as.numeric ]
-femdat <- 
-  fem[,.( pop_w = sum( DataValueNew ) ),
-      .( SeriesID, LocID, DataCatalogName, DataSourceAuthor, DateFormtd, AgeAbrgd ) ]
+
+pop_females <- 
+  pop_females[ SeriesID %in% filterSeriesFem$SeriesID,
+               .( pop_w = sum( DataValueNew ) ),
+               .( SeriesID, LocID, DataCatalogName, 
+                  DataSourceAuthor, DateFormtd, Age = AgeAbrgd ) ]
 
 # children
-child <- Population1[ AgeLabel %in% 0:14 ]
+pop_child <- pop_data[ AgeLabel %in% 0:14 ]
 
-filterSeries <- 
-  child[,.(LocID,SeriesID,AgeLabel)] %>% 
-  unique %>% 
-  .[,.N,.(LocID,SeriesID)] %>%
-  .[ N == 15,]$SeriesID
+check_age_child <- 
+  lapply( pop_child$SeriesID %>% unique, function( x ){
+    aux <- 
+      pop_child[SeriesID == x ,
+                .( LocID, SeriesID, AgeLabel ) ] %>% 
+      unique %>% 
+      .[ , .N, .( LocID, SeriesID ) ]
+  
+    aux$Select = aux$N == 15
+  
+    return( aux )
+    } )
 
-child <- child[ SeriesID == filterSeries ]
+filterSeriesChild <- 
+  do.call( rbind, check_age_child )[ Select == TRUE ]
 
+pop_child <- 
+  pop_child[ SeriesID %in% filterSeriesChild$SeriesID,
+             .( pop_c = sum( DataValueNew ) ),
+             .( SeriesID, LocID, DataCatalogName, 
+                DataSourceAuthor, DateFormtd, Age = AgeLabel )]
+
+series <- 
+  ( filterSeriesChild %>% 
+      merge( filterSeriesFem,
+             by = c( 'LocID', 'SeriesID' ) ) )$SeriesID
+
+a <- 
+lapply( series, function( x ){
+  
+  aux_c <- pop_child[ SeriesID == x ]
+  aux_f <- pop_females[ SeriesID == x ]
+  
+  date_ref <- unique( c( aux_f$DateFormtd, aux_c$DateFormtd )  )
+  date_ref_dec <- decimal_anydate( date_ref )
+  loc <- aux_c$LocID %>% unique
+  
+  popx5_w = aux_f$pop_w
+  ages5_w = aux_f$Age %>% unique
+  popx1_c = aux_c$pop_c
+  ages1_c = aux_c$Age %>% unique
+  
+  # 1) get child 0-5 mortality probability for reference period
+  #    reference period - 5 and reference period - 10
+  if( date_ref_dec < 1955 ){
+    ltb_ref <- FetchLifeTableWpp2019( locations = loc,
+                                      year = 1955 ,
+                                      sex = 'both' )
+  } else{
+    ltb_ref <- FetchLifeTableWpp2019( locations = loc,
+                                      year = date_ref_dec,
+                                      sex = 'both' )
+  }
+  
+  if( ( date_ref_dec - 5 ) < 1955 ){
+    ltb_ref5 = ltb_ref
+  } else{
+    ltb_ref5 <- FetchLifeTableWpp2019( locations = loc,
+                                       year = ( date_ref_dec - 5 ),
+                                       sex = 'both' )
+  }
+  
+  if( ( date_ref_dec - 10 ) < 1955 ){
+    ltb_ref10 = ltb_ref5
+  } else{
+    ltb_ref10 <- FetchLifeTableWpp2019( locations = loc,
+                                        year = ( date_ref_dec - 10 ),
+                                        sex = 'both' )
+  }
+
+  q1  <-  
+    ( ltb_ref$lx[ ltb_ref$x == 0 ] - ltb_ref$lx[ ltb_ref$x == 5 ] ) /
+    ltb_ref$lx[ ltb_ref$x == 0 ]
+  q2  <-  
+    ( ltb_ref5$lx[ ltb_ref5$x == 0 ] - ltb_ref5$lx[ ltb_ref5$x == 5 ] ) /
+    ltb_ref5$lx[ ltb_ref5$x == 0 ]
+  q3  <-  
+    ( ltb_ref10$lx[ ltb_ref10$x == 0 ] - ltb_ref10$lx[ ltb_ref10$x == 5 ] ) /
+    ltb_ref10$lx[ ltb_ref10$x == 0 ]
+  
+  q0_5 <- c( q1, q2, q3 )
+  
+  # 2) get female q15_45 mortality probability for reference period
+  #    reference period - 5 and reference period - 10
+  
+  if( date_ref_dec < 1955 ){
+    ltf_ref <- FetchLifeTableWpp2019( locations = loc,
+                                      year = 1955,
+                                      sex = 'female' )
+  } else{
+    ltf_ref <- FetchLifeTableWpp2019( locations = loc,
+                                      year = date_ref_dec,
+                                      sex = 'female' )
+  }
+  
+  if( ( date_ref_dec - 5 ) < 1955 ){
+    ltf_ref5 = ltf_ref
+  } else{
+    ltf_ref5 <- FetchLifeTableWpp2019( locations = loc,
+                                       year = ( date_ref_dec - 5 ),
+                                       sex = 'female' )
+  }
+  
+  if( ( date_ref_dec - 10 ) < 1955 ){
+    ltf_ref10 = ltf_ref5
+  } else{
+    ltf_ref10 <- FetchLifeTableWpp2019( locations = loc,
+                                        year = ( date_ref_dec - 10 ),
+                                        sex = 'female' )
+  }
+  
+  q1  <-  
+    ( ltf_ref$lx[ ltf_ref$x == 15 ] - ltf_ref$lx[ ltf_ref$x == 45 ] ) /
+    ltf_ref$lx[ ltf_ref$x == 15 ]
+  q2  <-  
+    ( ltf_ref5$lx[ ltf_ref5$x == 15 ] - ltf_ref5$lx[ ltf_ref5$x == 45 ] ) /
+    ltf_ref5$lx[ ltf_ref5$x == 15 ]
+  q3  <-  
+    ( ltf_ref10$lx[ ltf_ref10$x == 15 ] - ltf_ref10$lx[ ltf_ref10$x == 45 ] ) /
+    ltf_ref10$lx[ ltf_ref10$x == 15 ]
+  
+  q15_45f <- c( q1, q2, q3 )
+  
+  # 3) get female lx5 values matching ages
+  lx5_w <- ltf_ref$lx[ ltf_ref$x %in% ages5_w ]
+  
+  # 4) get children lx1 values matching ages using ungroup pclm function
+  lts_model <- pclm( x = ltb_ref$x[ 2:22 ],
+                     y = ltb_ref$dx[ 2:22 ],
+                     nlast = 1,
+                     offset = ltb_ref$Lx[ 2:22 ] )
+  lts <-
+    LifeTable( x = 0:99,
+               mx = c( ltb_ref$mx[1], fitted( lts_model )[ 1:99 ] ),
+               lx0 = 1,
+               sex = 'total' )$lt
+  
+  lx1_c <- lts$lx[ lts$x %in% 0:15 ]
+  
+  # 5) get fertility profile for current year and previous 15 period
+  
+  asfr <- FetchFertilityWpp2019( locations = loc,
+                                 year =  date_ref_dec )$asfr
+  if( ( date_ref_dec - 15 ) < 1950 ){
+    asfr_15prior <- asfr
+  } else{
+    asfr_15prior <- FetchFertilityWpp2019( locations = loc,
+                                           year = ( date_ref_dec - 15 ) )$asfr
+  }
+  
+  
+  # 6) run function
+  out <- 
+    data.table(
+      LocID = loc,
+      SeriesID = x,
+      DateFormtd = date_ref,
+      FertRevSurv( ages1_c, popx1_c, ages5_w, popx5_w, lx1_c, lx5_w,
+                   asfr5 = asfr, asfr5_15prior = asfr_15prior,
+                   q0_5, q15_45f, date_ref )
+    )
+    
+  return( out )
+} )
 ### Retrieve mortality information #-------------
-ltb <- FetchLifeTableWpp2019( locations = 1501,
-                              year = decimal_anydate('2008-03-03'),
-                              sex = 'both' )
 
-ltf <- FetchLifeTableWpp2019( locations = 1501,
+
+ltf <- FetchLifeTableWpp2019( locations = c( 32, 76 ),
                               year = decimal_anydate('2008-03-03'),
                               sex = 'female' )
 #################################################
 
 ### Retrieve fertility information #-------------
-asfr <- FetchFertilityWpp2019( locations = c(76,32),
-                               year = decimal_anydate( '2008-03-03' ) )$asfr
 
-asfr_15prior <- FetchFertilityWpp2019( locations = 'Cambodia',
-                                       year = decimal_anydate( '1993-03-03' ) )$asfr
 
 
 #################################################
