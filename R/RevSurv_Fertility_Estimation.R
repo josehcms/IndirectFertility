@@ -38,7 +38,7 @@ options( unpd_server = "https://popdiv.dfs.un.org/DemoData/api/" )
 
 ### Read UNPD data from server #------------------
 
-myLocations <- c( 76 )
+myLocations <- c( 76, 32 )
 
 # Loop through each location with `lapply`
 # This is useful if you want to work with many locations because 
@@ -164,8 +164,8 @@ series <-
       merge( filterSeriesFem,
              by = c( 'LocID', 'SeriesID' ) ) )$SeriesID
 
-a <- 
-lapply( series, function( x ){
+revsurv <- 
+  lapply( series, function( x ){
   
   aux_c <- pop_child[ SeriesID == x ]
   aux_f <- pop_females[ SeriesID == x ]
@@ -301,6 +301,18 @@ lapply( series, function( x ){
     
   return( out )
 } )
+
+out = do.call(rbind,revsurv)
+write.table(out, file =  'outputs/output_preview.txt', row.names = F)
+require(ggplot2)
+out %>%
+  .[, year_ref := substr( DateFormtd, 1, 4 ) %>% as.numeric() ] %>%
+  ggplot( aes( x = year, y = TFR, color = factor( SeriesID) ) ) +
+  geom_line( size = 1 ) +
+  facet_wrap( ~ LocID ) +
+  theme_classic()
+
+out[year>2010]
 ### Retrieve mortality information #-------------
 
 
