@@ -1,0 +1,440 @@
+"LocID" "SeriesID" "LocName" "DataCatalogID" "DataCatalogName" "DataSourceName" "TimeStart" "ChildAgeCriteriaMet" "FemAgeCriteriaMet"
+28 31513101151 "Antigua and Barbuda" 2274 "Antigua and Barbuda 1960 Census" "Demographic Yearbook" "07/04/1960" TRUE TRUE
+28 90171382167 "Antigua and Barbuda" 2277 "Antigua and Barbuda 2001 Census" "Demographic Yearbook" "28/05/2001" TRUE TRUE
+28 117992295629 "Antigua and Barbuda" 4732 "Antigua and Barbuda 2011 Census" "CELADE 2020" "27/05/2011" TRUE TRUE
+28 4923215926189 "Antigua and Barbuda" 395 "Antigua and Barbuda 1991 Census" "1991 census" "29/05/1991" TRUE TRUE
+28 6211810623195 "Antigua and Barbuda" 2275 "Antigua and Barbuda 1970 Census" "Demographic Yearbook" "07/04/1970" FALSE NA
+28 25312919713990 "Antigua and Barbuda" 2277 "Antigua and Barbuda 2001 Census" "Demographic Yearbook" "28/05/2001" NA NA
+28 157222203192175 "Antigua and Barbuda" 4732 "Antigua and Barbuda 2011 Census" "Demographic Yearbook" "27/05/2011" NA NA
+32 18983413242 "Argentina" 1433 "Argentina 1960 Census" "Demographic Yearbook" "30/09/1960" TRUE TRUE
+32 27403421434 "Argentina" 1433 "Argentina 1960 Census" "Mortality in Developing Countries" "01/10/1960" TRUE TRUE
+32 31198175986 "Argentina" 1433 "Argentina 1960 Census" "Mortality in developing countries" "01/09/1960" FALSE TRUE
+32 87208575130 "Argentina" 99 "Argentina 2001 Census" "Demographic Yearbook" "18/11/2001" TRUE TRUE
+32 159145635252 "Argentina" 1308 "Argentina 1991 Census" "Demographic Yearbook" "15/05/1991" TRUE TRUE
+32 1491861688122 "Argentina" 1481 "Argentina 1970 Census" "Mortality in developing countries" "01/09/1970" FALSE TRUE
+32 1624917923418 "Argentina" 4763 "Argentina 2010 Census" "Demographic Yearbook" "27/10/2010" TRUE TRUE
+32 2342503768252 "Argentina" 1505 "Argentina 1980 Census" "IPUMS International custom tabulations" "23/10/1980" TRUE TRUE
+32 2481427210146 "Argentina" 1308 "Argentina 1991 Census" "IPUMS International custom tabulations" "16/05/1991" TRUE TRUE
+32 4924138241137 "Argentina" 99 "Argentina 2001 Census" "IPUMS International custom tabulations" "19/11/2001" TRUE TRUE
+32 13111059100181 "Argentina" 1481 "Argentina 1970 Census" "Mortality in Developing Countries" "01/10/1970" TRUE TRUE
+32 13222169189221 "Argentina" 1481 "Argentina 1970 Census" "Demographic Yearbook" "30/09/1970" TRUE TRUE
+32 135184106105234 "Argentina" 4763 "Argentina 2010 Census" "IPUMS International custom tabulations" "27/10/2010" TRUE TRUE
+32 159235125252165 "Argentina" 1505 "Argentina 1980 Census" "Demographic Yearbook" "22/10/1980" TRUE TRUE
+32 236198239170147 "Argentina" 1481 "Argentina 1970 Census" "IPUMS International custom tabulations" "01/10/1970" TRUE TRUE
+44 341368742142 "Bahamas" 4734 "Bahamas 2010 Census" "Demographic Yearbook" "05/03/2010" TRUE TRUE
+44 1271283522194 "Bahamas" 938 "Bahamas 1980 Census" "Demographic Yearbook" "12/05/1980" TRUE TRUE
+44 2071721769186 "Bahamas" 1500 "Bahamas 1970 Census" "Demographic Yearbook" "07/04/1970" TRUE TRUE
+44 2078514913037 "Bahamas" 4734 "Bahamas 2010 Census" "Demographic Yearbook" "03/05/2010" TRUE TRUE
+44 10164169182208 "Bahamas" 415 "Bahamas 2000 Census" "Demographic Yearbook" "01/05/2000" TRUE TRUE
+44 23498242212122 "Bahamas" 1010 "Bahamas 1990 Census" "Demographic Yearbook" "01/05/1990" TRUE TRUE
+52 37148961785 "Barbados" 4735 "Barbados 2010 Census" "Demographic Yearbook" "01/05/2010" NA NA
+52 76831039739 "Barbados" 1049 "Barbados 1980 Census" "Demographic Yearbook" "12/05/1980" FALSE TRUE
+52 240203483010 "Barbados" 1418 "Barbados 1990 Census" "CELADE" "03/05/1990" TRUE TRUE
+52 911371211331 "Barbados" 95 "Barbados 1970 Census" "Mortality in Developing Countries" "08/04/1970" TRUE TRUE
+52 9017021051131 "Barbados" 95 "Barbados 1970 Census" "Mortality in developing countries" "01/04/1970" FALSE TRUE
+52 12724547236162 "Barbados" 1653 "Barbados 1960 Census" "Demographic Yearbook" "07/04/1960" TRUE TRUE
+52 21315796214206 "Barbados" 95 "Barbados 1970 Census" "Demographic Yearbook" "07/04/1970" TRUE TRUE
+52 22366252176245 "Barbados" 399 "Barbados 2000 Census" "Demographic Yearbook" "01/05/2000" TRUE TRUE
+52 234204109243104 "Barbados" 4735 "Barbados 2010 Census" "2010 POPULATION AND HOUSING CENSUS" "09/05/2010" TRUE TRUE
+68 6226520547 "Bolivia (Plurinational State of)" 944 "Bolivia 1992 Census" "Demographic Yearbook" "03/06/1992" TRUE TRUE
+68 14790245994 "Bolivia (Plurinational State of)" 1511 "Bolivia 2001 Census" "Demographic Yearbook" "05/09/2001" TRUE TRUE
+68 94107176287 "Bolivia (Plurinational State of)" 944 "Bolivia 1992 Census" "IPUMS International custom tabulations" "04/06/1992" TRUE TRUE
+68 135232224447 "Bolivia (Plurinational State of)" 1261 "Bolivia 1976 Census" "CELADE" "30/09/1976" TRUE TRUE
+68 169801189424 "Bolivia (Plurinational State of)" 1254 "Bolivia 1950 Census" "Demographic Yearbook" "05/09/1950" TRUE TRUE
+68 811538125176 "Bolivia (Plurinational State of)" 1511 "Bolivia 2001 Census" "IPUMS International custom tabulations" "06/09/2001" TRUE TRUE
+68 25325206250175 "Bolivia (Plurinational State of)" 1254 "Bolivia 1950 Census" "Mortality in developing countries" "01/09/1950" FALSE TRUE
+68 136254225131151 "Bolivia (Plurinational State of)" 1254 "Bolivia 1950 Census" "Mortality in Developing Countries" "06/09/1950" TRUE TRUE
+68 229164198105181 "Bolivia (Plurinational State of)" 1261 "Bolivia 1976 Census" "IPUMS International custom tabulations" "30/09/1976" TRUE TRUE
+68 253250117213228 "Bolivia (Plurinational State of)" 5280 "Bolivia 2012 Census" "Demographic Yearbook" "21/11/2012" TRUE TRUE
+76 273361513 "Brazil" 1479 "Brazil 1970 Census" "Mortality in Developing Countries" "02/09/1970" TRUE TRUE
+76 2282040028 "Brazil" 1072 "Brazil 1991 Census" "IPUMS International custom tabulations" "02/09/1991" TRUE TRUE
+76 5801172194 "Brazil" 1453 "Brazil 1950 Census" "Mortality in developing countries" "01/07/1950" FALSE TRUE
+76 82269197178 "Brazil" 1287 "Brazil 1960 Census" "Mortality in developing countries" "01/09/1960" FALSE TRUE
+76 125132201153 "Brazil" 1287 "Brazil 1960 Census" "Demographic Yearbook" "01/09/1960" TRUE TRUE
+76 233913948203 "Brazil" 4765 "Brazil 2010 Census" "Demographic Yearbook" "31/07/2010" TRUE TRUE
+76 416823339136 "Brazil" 1479 "Brazil 1970 Census" "Mortality in developing countries" "01/09/1970" FALSE TRUE
+76 581397619574 "Brazil" 4765 "Brazil 2010 Census" "Demographic Yearbook" "08/01/2010" TRUE TRUE
+76 731661558020 "Brazil" 1345 "Brazil 1980 Census" "Demographic Yearbook" "01/09/1980" TRUE TRUE
+76 784114911614 "Brazil" 1107 "Brazil 2000 Census" "Demographic Yearbook" "01/08/2000" NA NA
+76 1332282421940 "Brazil" 1287 "Brazil 1960 Census" "IPUMS International custom tabulations" "02/09/1960" TRUE TRUE
+76 1461453919424 "Brazil" 4765 "Brazil 2010 Census" "IPUMS International custom tabulations" "17/09/2010" TRUE TRUE
+76 1465899223212 "Brazil" 1454 "Brazil 1996 Census" "CELADE 2020" "02/08/1996" TRUE TRUE
+76 1766623614559 "Brazil" 1107 "Brazil 2000 Census" "IPUMS International custom tabulations" "02/08/2000" TRUE TRUE
+76 2344216177253 "Brazil" 1072 "Brazil 1991 Census" "Demographic Yearbook" "01/09/1991" TRUE TRUE
+76 2391441571353 "Brazil" 1479 "Brazil 1970 Census" "Demographic Yearbook" "01/09/1970" TRUE TRUE
+76 2542216714201 "Brazil" 5753 "Brazil 2007 Census" "CELADE 2020" "03/07/2007" TRUE TRUE
+76 6478143155250 "Brazil" 1345 "Brazil 1980 Census" "IPUMS International custom tabulations" "02/09/1980" TRUE TRUE
+76 13522629226230 "Brazil" 1287 "Brazil 1960 Census" "Mortality in Developing Countries" "02/09/1960" TRUE TRUE
+76 18412537157212 "Brazil" 4765 "Brazil 2010 Census" "Demographic Yearbook" "31/07/2010" TRUE TRUE
+76 38138235104183 "Brazil" 1453 "Brazil 1950 Census" "Demographic Yearbook" "01/09/1950" TRUE TRUE
+76 43147176175216 "Brazil" 1453 "Brazil 1950 Census" "Mortality in Developing Countries" "02/07/1950" TRUE TRUE
+76 68120222245114 "Brazil" 1107 "Brazil 2000 Census" "Demographic Yearbook" "01/08/2000" TRUE TRUE
+76 120248181117194 "Brazil" 1479 "Brazil 1970 Census" "IPUMS International custom tabulations" "02/09/1970" TRUE TRUE
+76 255213139126174 "Brazil" 1454 "Brazil 1996 Census" "Demographic Yearbook" "01/08/1996" NA NA
+84 157242341176 "Belize" 239 "Belize 2000 Census" "CELADE" "13/05/2000" TRUE TRUE
+84 1192374718659 "Belize" 940 "Belize 1970 Census" "Demographic Yearbook" "07/04/1970" TRUE TRUE
+84 5337128127243 "Belize" 245 "Belize 1980 Census" "Demographic Yearbook" "12/05/1980" TRUE TRUE
+84 7517598215176 "Belize" 4736 "Belize 2010 Census" "Demographic Yearbook" "12/05/2010" TRUE TRUE
+84 22653189137246 "Belize" 1532 "Belize 1991 Census" "Demographic Yearbook" "12/05/1991" TRUE TRUE
+152 20897111161 "Chile" 1253 "Chile 1952 Census" "Mortality in Developing Countries" "25/04/1952" TRUE TRUE
+152 29217746234 "Chile" 1037 "Chile 2002 Census" "IPUMS International custom tabulations" "25/04/2002" TRUE TRUE
+152 86683921151 "Chile" 1037 "Chile 2002 Census" "Demographic Yearbook" "24/04/2002" NA NA
+152 301518012761 "Chile" 1596 "Chile 1960 Census" "IPUMS International custom tabulations" "30/11/1960" TRUE TRUE
+152 410116521253 "Chile" 4766 "Chile 2012 Census" "CELADE" "16/04/2012" TRUE TRUE
+152 511855742196 "Chile" 7105 "Chile 2017 Census" "CELADE" "21/04/2017" TRUE TRUE
+152 782469619564 "Chile" 1596 "Chile 1960 Census" "Mortality in developing countries" "01/11/1960" FALSE TRUE
+152 813110316228 "Chile" 1285 "Chile 1970 Census" "IPUMS International custom tabulations" "23/04/1970" TRUE TRUE
+152 1167147184119 "Chile" 1596 "Chile 1960 Census" "Demographic Yearbook" "29/11/1960" TRUE FALSE
+152 1256014253161 "Chile" 1253 "Chile 1952 Census" "Demographic Yearbook" "24/04/1952" TRUE FALSE
+152 1741821421822 "Chile" 1593 "Chile 1982 Census" "Demographic Yearbook" "21/04/1982" TRUE TRUE
+152 1922269915935 "Chile" 1596 "Chile 1960 Census" "Mortality in Developing Countries" "30/11/1960" TRUE TRUE
+152 2021802275860 "Chile" 1285 "Chile 1970 Census" "Demographic Yearbook" "22/04/1970" TRUE TRUE
+152 2311073625033 "Chile" 861 "Chile 1992 Census" "Demographic Yearbook" "22/04/1992" TRUE TRUE
+152 12811510112117 "Chile" 1253 "Chile 1952 Census" "Mortality in developing countries" "01/05/1952" FALSE TRUE
+152 22523548125104 "Chile" 1593 "Chile 1982 Census" "IPUMS International custom tabulations" "22/04/1982" TRUE TRUE
+152 85188168195235 "Chile" 1037 "Chile 2002 Census" "Demographic Yearbook" "24/04/2002" TRUE TRUE
+152 112240178149181 "Chile" 861 "Chile 1992 Census" "IPUMS International custom tabulations" "23/04/1992" TRUE TRUE
+170 67721223251 "Colombia" 4767 "Colombia 2018 Census" "CELADE" "03/06/2018" TRUE TRUE
+170 165151073387 "Colombia" 968 "Colombia 1973 Census" "Mortality in developing countries" "01/10/1973" FALSE TRUE
+170 182642441352 "Colombia" 257 "Colombia 1985 Census" "IPUMS International custom tabulations" "16/10/1985" TRUE TRUE
+170 332529313911 "Colombia" 952 "Colombia 1964 Census" "IPUMS International custom tabulations" "16/07/1964" TRUE TRUE
+170 494522924230 "Colombia" 1359 "Colombia 1993 Census" "IPUMS International custom tabulations" "25/10/1993" TRUE TRUE
+170 1029913014940 "Colombia" 968 "Colombia 1973 Census" "Mortality in Developing Countries" "25/10/1973" TRUE TRUE
+170 1121384037141 "Colombia" 1359 "Colombia 1993 Census" "Demographic Yearbook" "24/10/1993" NA FALSE
+170 2248885180130 "Colombia" 407 "Colombia 2005 Census" "Demographic Yearbook" "22/05/2005" TRUE TRUE
+170 2384225235152 "Colombia" 257 "Colombia 1985 Census" "Demographic Yearbook" "15/10/1985" TRUE TRUE
+170 5094168129142 "Colombia" 1359 "Colombia 1993 Census" "Demographic Yearbook" "24/10/1993" TRUE FALSE
+170 6216969143132 "Colombia" 968 "Colombia 1973 Census" "IPUMS International custom tabulations" "25/10/1973" TRUE TRUE
+170 11118466188231 "Colombia" 952 "Colombia 1964 Census" "Mortality in Developing Countries" "16/07/1964" TRUE TRUE
+170 15417335137201 "Colombia" 952 "Colombia 1964 Census" "Demographic Yearbook" "15/07/1964" TRUE TRUE
+170 18194227247179 "Colombia" 968 "Colombia 1973 Census" "Demographic Yearbook" "24/10/1973" TRUE TRUE
+170 21841208249106 "Colombia" 1359 "Colombia 1993 Census" "Demographic Yearbook" "24/10/1993" NA NA
+170 24515021223529 "Colombia" 407 "Colombia 2005 Census" "Demographic Yearbook" "22/05/2005" TRUE TRUE
+170 25017911201135 "Colombia" 952 "Colombia 1964 Census" "Mortality in developing countries" "01/07/1964" FALSE TRUE
+170 235166245119250 "Colombia" 407 "Colombia 2005 Census" "IPUMS International custom tabulations" "26/08/2005" TRUE TRUE
+188 206458913 "Costa Rica" 1590 "Costa Rica 2000 Census" "Demographic Yearbook" "26/06/2000" TRUE TRUE
+188 34632402513 "Costa Rica" 979 "Costa Rica 1950 Census" "Demographic Yearbook" "22/05/1950" TRUE TRUE
+188 102185951443 "Costa Rica" 1590 "Costa Rica 2000 Census" "IPUMS International custom tabulations" "27/06/2000" TRUE TRUE
+188 331112924742 "Costa Rica" 1119 "Costa Rica 1963 Census" "Demographic Yearbook" "01/04/1963" TRUE TRUE
+188 451501501434 "Costa Rica" 4741 "Costa Rica 2011 Census" "IPUMS International custom tabulations" "03/06/2011" TRUE TRUE
+188 512152404210 "Costa Rica" 935 "Costa Rica 1973 Census" "Demographic Yearbook" "14/05/1973" TRUE TRUE
+188 691271868679 "Costa Rica" 979 "Costa Rica 1950 Census" "Mortality in developing countries" "01/05/1950" FALSE TRUE
+188 1688325112478 "Costa Rica" 990 "Costa Rica 1984 Census" "IPUMS International custom tabulations" "07/10/1984" TRUE TRUE
+188 1833210166254 "Costa Rica" 4741 "Costa Rica 2011 Census" "Demographic Yearbook" "30/05/2011" TRUE TRUE
+188 1991026922082 "Costa Rica" 990 "Costa Rica 1984 Census" "Demographic Yearbook" "10/06/1984" TRUE TRUE
+188 13346128140111 "Costa Rica" 979 "Costa Rica 1950 Census" "Mortality in Developing Countries" "23/05/1950" TRUE TRUE
+188 14821217417777 "Costa Rica" 1119 "Costa Rica 1963 Census" "IPUMS International custom tabulations" "15/05/1963" TRUE TRUE
+188 25018725415279 "Costa Rica" 935 "Costa Rica 1973 Census" "IPUMS International custom tabulations" "15/05/1973" TRUE TRUE
+188 187253166251177 "Costa Rica" 1119 "Costa Rica 1963 Census" "Mortality in developing countries" "01/04/1963" FALSE TRUE
+188 195199217106199 "Costa Rica" 1119 "Costa Rica 1963 Census" "Mortality in Developing Countries" "15/05/1963" TRUE TRUE
+192 1522578253212 "Cuba" 4742 "Cuba 2012 Census" "Demographic Yearbook" "14/09/2012" TRUE TRUE
+192 6519812345224 "Cuba" 346 "Cuba 2002 Census" "Demographic Yearbook" "07/09/2002" TRUE TRUE
+192 22017718612323 "Cuba" 76 "Cuba 1953 Census" "Demographic Yearbook" "28/01/1953" TRUE TRUE
+192 54156203227237 "Cuba" 4742 "Cuba 2012 Census" "Demographic Yearbook" "14/09/2012" TRUE TRUE
+192 124229182109101 "Cuba" 346 "Cuba 2002 Census" "IPUMS International custom tabulations" "06/09/2002" TRUE TRUE
+192 247146200117235 "Cuba" 229 "Cuba 1981 Census" "Demographic Yearbook" "11/09/1981" TRUE TRUE
+214 16267611955 "Dominican Republic" 910 "Dominican Republic 2002 Census" "IPUMS International custom tabulations" "20/10/2002" TRUE TRUE
+214 71961378136 "Dominican Republic" 4744 "Dominican Republic 2010 Census" "IPUMS International custom tabulations" "07/12/2010" TRUE TRUE
+214 393991151102 "Dominican Republic" 1138 "Dominican Republic 1950 Census" "Demographic Yearbook" "06/08/1950" TRUE TRUE
+214 394812134138 "Dominican Republic" 939 "Dominican Republic 1960 Census" "IPUMS International custom tabulations" "08/08/1960" TRUE TRUE
+214 462613621431 "Dominican Republic" 939 "Dominican Republic 1960 Census" "Demographic Yearbook" "07/08/1960" TRUE TRUE
+214 844012518192 "Dominican Republic" 235 "Dominican Republic 1970 Census" "Demographic Yearbook" "09/01/1970" TRUE TRUE
+214 1312069738220 "Dominican Republic" 4744 "Dominican Republic 2010 Census" "Demographic Yearbook" "01/12/2010" TRUE TRUE
+214 1771292472283 "Dominican Republic" 1354 "Dominican Republic 1993 Census" "Demographic Yearbook" "24/09/1993" TRUE TRUE
+214 1771331795268 "Dominican Republic" 235 "Dominican Republic 1970 Census" "IPUMS International custom tabulations" "10/01/1970" TRUE TRUE
+214 2297637234252 "Dominican Republic" 1138 "Dominican Republic 1950 Census" "Mortality in developing countries" "01/08/1950" FALSE TRUE
+214 2880131132129 "Dominican Republic" 101 "Dominican Republic 1981 Census" "CELADE 2020" "13/12/1981" TRUE TRUE
+214 4912143185215 "Dominican Republic" 4744 "Dominican Republic 2010 Census" "Demographic Yearbook" "12/01/2010" NA NA
+214 5128184119196 "Dominican Republic" 910 "Dominican Republic 2002 Census" "Demographic Yearbook" "18/10/2002" TRUE TRUE
+214 10180173129209 "Dominican Republic" 101 "Dominican Republic 1981 Census" "IPUMS International custom tabulations" "13/12/1981" TRUE TRUE
+214 19019081250183 "Dominican Republic" 1138 "Dominican Republic 1950 Census" "Mortality in Developing Countries" "07/08/1950" TRUE TRUE
+218 4611875695 "Ecuador" 1440 "Ecuador 1982 Census" "IPUMS International custom tabulations" "29/11/1982" TRUE TRUE
+218 31811152384 "Ecuador" 1460 "Ecuador 1962 Census" "Demographic Yearbook" "25/11/1962" TRUE TRUE
+218 36943614064 "Ecuador" 1440 "Ecuador 1982 Census" "Demographic Yearbook" "28/11/1982" TRUE TRUE
+218 177144832291 "Ecuador" 921 "Ecuador 1990 Census" "Demographic Yearbook" "25/11/1990" NA FALSE
+218 1571172381292 "Ecuador" 1320 "Ecuador 1950 Census" "Mortality in Developing Countries" "30/11/1950" TRUE TRUE
+218 1691461434829 "Ecuador" 1379 "Ecuador 1974 Census" "IPUMS International custom tabulations" "09/06/1974" TRUE TRUE
+218 1705019717522 "Ecuador" 4768 "Ecuador 2010 Census" "IPUMS International custom tabulations" "29/11/2010" TRUE TRUE
+218 2431202018197 "Ecuador" 4768 "Ecuador 2010 Census" "Demographic Yearbook" "28/11/2010" TRUE TRUE
+218 2481636332233 "Ecuador" 1460 "Ecuador 1962 Census" "Mortality in Developing Countries" "26/11/1962" TRUE TRUE
+218 4413118864225 "Ecuador" 921 "Ecuador 1990 Census" "Demographic Yearbook" "25/11/1990" TRUE FALSE
+218 7025522417673 "Ecuador" 1320 "Ecuador 1950 Census" "Mortality in developing countries" "01/11/1950" FALSE TRUE
+218 7412315318958 "Ecuador" 1460 "Ecuador 1962 Census" "Mortality in developing countries" "01/11/1962" FALSE TRUE
+218 8913659158228 "Ecuador" 1460 "Ecuador 1962 Census" "IPUMS International custom tabulations" "26/11/1962" TRUE TRUE
+218 9124142128247 "Ecuador" 921 "Ecuador 1990 Census" "IPUMS International custom tabulations" "26/11/1990" TRUE TRUE
+218 21525414723650 "Ecuador" 1162 "Ecuador 2001 Census" "Demographic Yearbook" "25/11/2001" TRUE TRUE
+218 22023611070215 "Ecuador" 1320 "Ecuador 1950 Census" "Demographic Yearbook" "29/11/1950" TRUE TRUE
+218 22145161243171 "Ecuador" 1162 "Ecuador 2001 Census" "IPUMS International custom tabulations" "26/11/2001" TRUE TRUE
+222 18142558627 "El Salvador" 895 "El Salvador 1992 Census" "IPUMS International custom tabulations" "01/10/1992" TRUE TRUE
+222 81012190206 "El Salvador" 1251 "El Salvador 1971 Census" "Demographic Yearbook" "28/06/1971" TRUE TRUE
+222 87254938976 "El Salvador" 1587 "El Salvador 1961 Census" "Mortality in Developing Countries" "03/05/1961" TRUE TRUE
+222 147431716218 "El Salvador" 360 "El Salvador 1950 Census" "Mortality in Developing Countries" "14/06/1950" TRUE TRUE
+222 1131809322172 "El Salvador" 360 "El Salvador 1950 Census" "Mortality in developing countries" "01/06/1950" FALSE TRUE
+222 1704560171251 "El Salvador" 1587 "El Salvador 1961 Census" "Demographic Yearbook" "02/05/1961" TRUE TRUE
+222 5189217174221 "El Salvador" 1096 "El Salvador 2007 Census" "Demographic Yearbook" "12/05/2007" TRUE TRUE
+222 8513030120254 "El Salvador" 1251 "El Salvador 1971 Census" "Mortality in developing countries" "01/06/1971" FALSE TRUE
+222 12422123219158 "El Salvador" 360 "El Salvador 1950 Census" "Demographic Yearbook" "13/06/1950" TRUE TRUE
+222 14317020814104 "El Salvador" 1251 "El Salvador 1971 Census" "Mortality in Developing Countries" "29/06/1971" TRUE TRUE
+222 23311223367233 "El Salvador" 1096 "El Salvador 2007 Census" "IPUMS International custom tabulations" "20/05/2007" TRUE TRUE
+222 202172185190126 "El Salvador" 895 "El Salvador 1992 Census" "Demographic Yearbook" "27/09/1992" TRUE TRUE
+222 205174216159147 "El Salvador" 1587 "El Salvador 1961 Census" "Mortality in developing countries" "01/05/1961" FALSE TRUE
+254 94514017234 "French Guiana" 1666 "French Guiana 1982 Census" "Demographic Yearbook" "09/03/1982" TRUE TRUE
+254 108415442156 "French Guiana" 7768 "French Guiana 2011 Census" "Évolution et structure de la population en 2011" "01/01/2011" TRUE TRUE
+254 142442188140 "French Guiana" 7769 "French Guiana 2012 Census" "Évolution et structure de la population en 2012" "01/01/2012" TRUE TRUE
+254 192543521015 "French Guiana" 7770 "French Guiana 2013 Census" "Évolution et structure de la population en 2013" "01/01/2013" TRUE TRUE
+254 198321211945 "French Guiana" 977 "French Guiana 1999 Census" "Demographic Yearbook" "08/03/1999" TRUE TRUE
+254 199112617015 "French Guiana" 7772 "French Guiana 2016 Census" "Évolution et structure de la population en 2016" "01/01/2016" TRUE TRUE
+254 209394521939 "French Guiana" 1401 "French Guiana 1967 Census" "Mortality in Developing Countries" "17/10/1967" TRUE TRUE
+254 472189513794 "French Guiana" 7648 "French Guiana 2015 Census" "Demographic Yearbook" "01/01/2015" NA NA
+254 606818811113 "French Guiana" 1401 "French Guiana 1967 Census" "Demographic Yearbook" "16/10/1967" TRUE TRUE
+254 698133242169 "French Guiana" 932 "French Guiana 1990 Census" "Demographic Yearbook" "15/03/1990" TRUE TRUE
+254 817694137134 "French Guiana" 7648 "French Guiana 2015 Census" "Évolution et structure de la population en 2015" "03/07/2015" TRUE TRUE
+254 831591332971 "French Guiana" 1401 "French Guiana 1967 Census" "Mortality in developing countries" "01/10/1967" FALSE TRUE
+254 1861303722427 "French Guiana" 7648 "French Guiana 2015 Census" "Demographic Yearbook" "01/01/2015" FALSE TRUE
+254 2717025430216 "French Guiana" 7766 "French Guiana 2009 Census" "Évolution et structure de la population en 2009" "01/01/2009" TRUE TRUE
+254 3124720448227 "French Guiana" 2362 "French Guiana 2006 Census" "Évolution et structure de la population en 2006" "01/01/2006" TRUE TRUE
+254 11774146132144 "French Guiana" 7490 "French Guiana 2014 Census" "Évolution et structure de la population en 2014" "03/07/2014" TRUE TRUE
+254 17122422614694 "French Guiana" 7767 "French Guiana 2010 Census" "Évolution et structure de la population en 2010" "01/01/2010" TRUE TRUE
+254 20654131132172 "French Guiana" 905 "French Guiana 1961 Census" "Demographic Yearbook" "09/10/1961" TRUE TRUE
+254 37166108151195 "French Guiana" 7764 "French Guiana 2007 Census" "Évolution et structure de la population en 2007" "01/01/2007" TRUE TRUE
+254 155215132121248 "French Guiana" 2362 "French Guiana 2006 Census" "Demographic Yearbook" "01/01/2006" NA NA
+254 188229205163225 "French Guiana" 7765 "French Guiana 2008 Census" "Évolution et structure de la population en 2008" "01/01/2008" TRUE TRUE
+308 302513684 "Grenada" 1477 "Grenada 1991 Census" "CELADE" "13/05/1991" TRUE TRUE
+308 13351314381 "Grenada" 4746 "Grenada 2011 Census" "CELADE" "12/05/2011" TRUE TRUE
+308 19319125411478 "Grenada" 4746 "Grenada 2011 Census" "Demographic Yearbook" "12/05/2011" NA NA
+308 244128110206120 "Grenada" 398 "Grenada 1981 Census" "Demographic Yearbook" "30/04/1981" TRUE TRUE
+312 5416051198 "Guadeloupe" 7906 "Guadeloupe 2012 Census" "Évolution et structure de la population en 2012" "01/01/2012" TRUE TRUE
+312 18374882156 "Guadeloupe" 7901 "Guadeloupe 2007 Census" "Évolution et structure de la population en 2007" "01/01/2007" TRUE TRUE
+312 251898622372 "Guadeloupe" 2392 "Guadeloupe 2006 Census" "Demographic Yearbook" "01/01/2006" NA NA
+312 271242153229 "Guadeloupe" 1541 "Guadeloupe 1961 Census" "Demographic Yearbook" "09/10/1961" TRUE TRUE
+312 913113483221 "Guadeloupe" 7904 "Guadeloupe 2010 Census" "Évolution et structure de la population en 2010" "01/01/2010" TRUE TRUE
+312 1392132099368 "Guadeloupe" 1023 "Guadeloupe 1982 Census" "Demographic Yearbook" "09/03/1982" TRUE TRUE
+312 1491177761167 "Guadeloupe" 2392 "Guadeloupe 2006 Census" "Évolution et structure de la population en 2006" "01/01/2006" TRUE TRUE
+312 1904414716831 "Guadeloupe" 7907 "Guadeloupe 2013 Census" "Évolution et structure de la population en 2013" "01/01/2013" TRUE TRUE
+312 1955517094187 "Guadeloupe" 7636 "Guadeloupe 2015 Census" "Demographic Yearbook" "01/01/2015" TRUE TRUE
+312 2481053719245 "Guadeloupe" 1652 "Guadeloupe 1990 Census" "Demographic Yearbook" "15/03/1990" NA NA
+312 4117382202198 "Guadeloupe" 7910 "Guadeloupe 2016 Census" "Évolution et structure de la population en 2016" "01/01/2016" TRUE TRUE
+312 7589127251255 "Guadeloupe" 7903 "Guadeloupe 2009 Census" "Évolution et structure de la population en 2009" "01/01/2009" TRUE TRUE
+312 16315711518843 "Guadeloupe" 7905 "Guadeloupe 2011 Census" "Évolution et structure de la population en 2011" "01/01/2011" TRUE TRUE
+312 20311917249186 "Guadeloupe" 103 "Guadeloupe 1999 Census" "Demographic Yearbook" "08/03/1999" TRUE TRUE
+312 23023127209206 "Guadeloupe" 7902 "Guadeloupe 2008 Census" "Évolution et structure de la population en 2008" "01/01/2008" TRUE TRUE
+312 69230125172236 "Guadeloupe" 1430 "Guadeloupe 1967 Census" "Demographic Yearbook" "16/10/1967" TRUE TRUE
+312 206247133142110 "Guadeloupe" 7909 "Guadeloupe 2014 Census" "Évolution et structure de la population en 2014" "01/01/2014" TRUE TRUE
+320 2710155943 "Guatemala" 1046 "Guatemala 1964 Census" "Mortality in Developing Countries" "19/04/1964" TRUE TRUE
+320 21875231687 "Guatemala" 1355 "Guatemala 1950 Census" "Mortality in developing countries" "01/04/1950" FALSE TRUE
+320 102943839243 "Guatemala" 1519 "Guatemala 1994 Census" "CELADE" "24/04/1994" TRUE TRUE
+320 412298458165 "Guatemala" 1519 "Guatemala 1994 Census" "IPUMS International custom tabulations" "24/04/1994" TRUE TRUE
+320 491612515515 "Guatemala" 1046 "Guatemala 1964 Census" "Mortality in developing countries" "01/04/1964" FALSE TRUE
+320 502284723589 "Guatemala" 1046 "Guatemala 1964 Census" "Demographic Yearbook" "18/04/1964" TRUE TRUE
+320 1452071665417 "Guatemala" 1150 "Guatemala 2002 Census" "CELADE" "26/11/2002" TRUE TRUE
+320 2391381509155 "Guatemala" 1355 "Guatemala 1950 Census" "Demographic Yearbook" "18/04/1950" TRUE TRUE
+320 2421561265080 "Guatemala" 1416 "Guatemala 1981 Census" "Demographic Yearbook" "23/03/1981" TRUE TRUE
+320 2511192208106 "Guatemala" 7008 "Guatemala 2018 Census" "CELADE" "03/07/2018" TRUE TRUE
+320 2721921313209 "Guatemala" 1046 "Guatemala 1964 Census" "IPUMS International custom tabulations" "19/04/1964" TRUE TRUE
+320 17114783164248 "Guatemala" 1416 "Guatemala 1981 Census" "IPUMS International custom tabulations" "24/03/1981" TRUE TRUE
+320 22265232122165 "Guatemala" 1516 "Guatemala 1973 Census" "Demographic Yearbook" "26/03/1973" TRUE TRUE
+320 123146207185226 "Guatemala" 1150 "Guatemala 2002 Census" "IPUMS International custom tabulations" "26/11/2002" TRUE TRUE
+320 181204236203192 "Guatemala" 1516 "Guatemala 1973 Census" "IPUMS International custom tabulations" "27/03/1973" TRUE TRUE
+320 195114199162128 "Guatemala" 1355 "Guatemala 1950 Census" "Mortality in Developing Countries" "19/04/1950" TRUE TRUE
+328 20120590764 "Guyana" 4769 "Guyana 2012 Census" "Demographic Yearbook" "15/09/2012" NA NA
+328 115176292146 "Guyana" 1050 "Guyana 1991 Census" "Demographic Yearbook" "12/05/1991" NA NA
+328 180111731220 "Guyana" 1202 "Guyana 1970 Census" "Demographic Yearbook" "07/04/1970" TRUE TRUE
+328 8512786231115 "Guyana" 1333 "Guyana 1980 Census" "Demographic Yearbook" "12/05/1980" TRUE TRUE
+328 20511024712089 "Guyana" 1225 "Guyana 2002 Census" "Demographic Yearbook" "15/09/2002" NA NA
+332 65635570107 "Haiti" 1024 "Haiti 1982 Census" "Demographic Yearbook" "30/08/1982" TRUE TRUE
+332 318222113122 "Haiti" 228 "Haiti 1950 Census" "Mortality in Developing Countries" "08/08/1950" TRUE TRUE
+332 1143823823827 "Haiti" 1034 "Haiti 2003 Census" "CELADE" "12/01/2003" TRUE TRUE
+332 1771406865135 "Haiti" 1656 "Haiti 1971 Census" "IPUMS International custom tabulations" "01/09/1971" TRUE TRUE
+332 2282521095128 "Haiti" 1034 "Haiti 2003 Census" "IPUMS International custom tabulations" "12/01/2003" TRUE TRUE
+332 5115189228136 "Haiti" 228 "Haiti 1950 Census" "Mortality in developing countries" "01/08/1950" FALSE TRUE
+332 9911318821690 "Haiti" 1024 "Haiti 1982 Census" "IPUMS International custom tabulations" "31/08/1982" TRUE TRUE
+332 21410517921491 "Haiti" 228 "Haiti 1950 Census" "Demographic Yearbook" "07/08/1950" TRUE TRUE
+332 106206185107156 "Haiti" 1656 "Haiti 1971 Census" "Demographic Yearbook" "31/08/1971" TRUE TRUE
+340 56144661441 "Honduras" 1391 "Honduras 1961 Census" "IPUMS International custom tabulations" "18/04/1961" TRUE TRUE
+340 151113713125 "Honduras" 1342 "Honduras 1988 Census" "IPUMS International custom tabulations" "30/05/1988" TRUE TRUE
+340 152111313245 "Honduras" 4749 "Honduras 2013 Census" "Demographic Yearbook" "10/08/2013" TRUE TRUE
+340 461921537645 "Honduras" 1391 "Honduras 1961 Census" "Mortality in Developing Countries" "18/04/1961" TRUE TRUE
+340 1061545518481 "Honduras" 1391 "Honduras 1961 Census" "Demographic Yearbook" "17/04/1961" FALSE FALSE
+340 1464283192168 "Honduras" 1316 "Honduras 1974 Census" "IPUMS International custom tabulations" "07/03/1974" TRUE TRUE
+340 9414714410392 "Honduras" 1342 "Honduras 1988 Census" "Demographic Yearbook" "11/05/1988" FALSE TRUE
+340 9723839164191 "Honduras" 1486 "Honduras 2001 Census" "IPUMS International custom tabulations" "29/07/2001" TRUE TRUE
+340 9814621818977 "Honduras" 1486 "Honduras 2001 Census" "Demographic Yearbook" "28/07/2001" TRUE TRUE
+340 194144229199190 "Honduras" 1391 "Honduras 1961 Census" "Mortality in developing countries" "01/04/1961" FALSE TRUE
+388 17595420940 "Jamaica" 53 "Jamaica 2001 Census" "Demographic Yearbook" "10/09/2001" TRUE TRUE
+388 74112997131 "Jamaica" 1184 "Jamaica 1991 Census" "IPUMS International custom tabulations" "10/04/1991" TRUE TRUE
+388 93226811852 "Jamaica" 1184 "Jamaica 1991 Census" "Demographic Yearbook" "07/04/1991" TRUE TRUE
+388 246199874139 "Jamaica" 53 "Jamaica 2001 Census" "IPUMS International custom tabulations" "11/09/2001" TRUE TRUE
+388 1521061320196 "Jamaica" 948 "Jamaica 1982 Census" "Demographic Yearbook" "08/04/1982" TRUE TRUE
+388 1721845419326 "Jamaica" 948 "Jamaica 1982 Census" "IPUMS International custom tabulations" "09/06/1982" TRUE TRUE
+388 2280237210144 "Jamaica" 1177 "Jamaica 1960 Census" "Mortality in Developing Countries" "08/04/1960" TRUE TRUE
+388 3173194101171 "Jamaica" 4750 "Jamaica 2011 Census" "Demographic Yearbook" "04/04/2011" TRUE TRUE
+388 4790175225255 "Jamaica" 1177 "Jamaica 1960 Census" "Mortality in developing countries" "01/04/1960" FALSE TRUE
+474 386324238 "Martinique" 2442 "Martinique 2006 Census" "Évolution et structure de la population en 2006" "01/01/2006" TRUE TRUE
+474 24882877178 "Martinique" 7895 "Martinique 2011 Census" "Évolution et structure de la population en 2011" "01/01/2011" TRUE TRUE
+474 179914778223 "Martinique" 1137 "Martinique 1999 Census" "Demographic Yearbook" "08/03/1999" TRUE TRUE
+474 186135734374 "Martinique" 7898 "Martinique 2014 Census" "Évolution et structure de la population en 2014" "01/01/2014" TRUE TRUE
+474 247116632163 "Martinique" 7899 "Martinique 2016 Census" "Évolution et structure de la population en 2016" "01/01/2016" TRUE TRUE
+474 719634105115 "Martinique" 859 "Martinique 1961 Census" "Demographic Yearbook" "09/10/1961" TRUE TRUE
+474 932381604934 "Martinique" 7786 "Martinique 2008 Census" "Évolution et structure de la population en 2008" "01/01/2008" TRUE TRUE
+474 1306423942162 "Martinique" 946 "Martinique 1990 Census" "Demographic Yearbook" "15/03/1990" TRUE TRUE
+474 1438160105159 "Martinique" 3205 "Martinique 1954 Census" "Demographic Yearbook" "01/07/1954" TRUE TRUE
+474 1508051252202 "Martinique" 1517 "Martinique 1982 Census" "Demographic Yearbook" "09/03/1982" TRUE TRUE
+474 1632286162177 "Martinique" 7897 "Martinique 2013 Census" "Évolution et structure de la population en 2013" "01/01/2013" TRUE TRUE
+474 1951529716159 "Martinique" 1137 "Martinique 1999 Census" "Demographic Yearbook" "08/03/1999" NA NA
+474 2259224922783 "Martinique" 2442 "Martinique 2006 Census" "Demographic Yearbook" "01/01/2006" NA NA
+474 13578163145238 "Martinique" 7896 "Martinique 2012 Census" "Évolution et structure de la population en 2012" "01/01/2012" TRUE TRUE
+474 15055220254219 "Martinique" 7785 "Martinique 2007 Census" "Évolution et structure de la population en 2007" "01/01/2007" TRUE TRUE
+474 60247142228187 "Martinique" 1442 "Martinique 1967 Census" "Demographic Yearbook" "16/10/1967" TRUE TRUE
+474 71159167169119 "Martinique" 7893 "Martinique 2009 Census" "Évolution et structure de la population en 2009" "01/01/2009" TRUE TRUE
+474 108107110195219 "Martinique" 7649 "Martinique 2015 Census" "Demographic Yearbook" "01/01/2015" TRUE TRUE
+474 128168104145199 "Martinique" 7894 "Martinique 2010 Census" "Évolution et structure de la population en 2010" "01/01/2010" TRUE TRUE
+484 80799317169 "Mexico" 1015 "Mexico 1970 Census" "Demographic Yearbook" "28/01/1970" TRUE TRUE
+484 162216104637 "Mexico" 1350 "Mexico 1990 Census" "Demographic Yearbook" "12/03/1990" TRUE TRUE
+484 181124167186 "Mexico" 226 "Mexico 2000 Census" "Demographic Yearbook" "14/02/2000" TRUE TRUE
+484 192156604881 "Mexico" 1015 "Mexico 1970 Census" "Mortality in Developing Countries" "29/01/1970" TRUE TRUE
+484 222514121919 "Mexico" 1015 "Mexico 1970 Census" "Mortality in developing countries" "01/01/1970" FALSE TRUE
+484 382033513476 "Mexico" 1209 "Mexico 1950 Census" "Mortality in Developing Countries" "07/06/1950" TRUE TRUE
+484 741538380108 "Mexico" 4466 "Mexico 1995 Sample Census" "CELADE" "07/11/1995" TRUE TRUE
+484 1414117298187 "Mexico" 981 "Mexico 2005 Sample Census / Count of Population and Dwellings 2005" "Demographic Yearbook" "17/10/2005" TRUE TRUE
+484 1901572722128 "Mexico" 4466 "Mexico 1995 Sample Census" "IPUMS International custom tabulations" "07/11/1995" TRUE TRUE
+484 2452128137190 "Mexico" 839 "Mexico 1960 Census" "IPUMS International custom tabulations" "09/06/1960" TRUE TRUE
+484 3825416622214 "Mexico" 839 "Mexico 1960 Census" "Mortality in developing countries" "01/06/1960" FALSE TRUE
+484 5784109222116 "Mexico" 1015 "Mexico 1970 Census" "IPUMS International custom tabulations" "29/01/1970" TRUE TRUE
+484 14244236178205 "Mexico" 1102 "Mexico 1980 Census" "Demographic Yearbook" "04/06/1980" TRUE TRUE
+484 15521141232147 "Mexico" 5271 "Mexico 2010 Census" "IPUMS International custom tabulations" "14/06/2010" TRUE TRUE
+484 18619161247162 "Mexico" 1209 "Mexico 1950 Census" "Demographic Yearbook" "06/06/1950" TRUE TRUE
+484 21214273171135 "Mexico" 839 "Mexico 1960 Census" "Mortality in Developing Countries" "09/06/1960" TRUE TRUE
+484 24818315553214 "Mexico" 5271 "Mexico 2010 Census" "Demographic Yearbook" "12/06/2010" TRUE TRUE
+484 184177213120148 "Mexico" 981 "Mexico 2005 Sample Census / Count of Population and Dwellings 2005" "IPUMS International custom tabulations" "30/08/2005" TRUE TRUE
+533 221200182456 "Aruba" 1334 "Aruba 1981 Census" "Demographic Yearbook" "01/02/1981" TRUE TRUE
+533 261117225114 "Aruba" 4733 "Aruba 2010 Census" "Demographic Yearbook" "29/09/2010" TRUE TRUE
+533 11114456159148 "Aruba" 2474 "Aruba 1960 Census" "Demographic Yearbook" "27/06/1960" TRUE TRUE
+533 14175253107162 "Aruba" 292 "Aruba 2000 Census" "Demographic Yearbook" "14/10/2000" TRUE TRUE
+533 22360204138192 "Aruba" 974 "Aruba 1991 Census" "Demographic Yearbook" "06/10/1991" TRUE TRUE
+558 83435149108 "Nicaragua" 368 "Nicaragua 1963 Census" "Mortality in developing countries" "01/04/1963" FALSE TRUE
+558 155156126483 "Nicaragua" 1189 "Nicaragua 2005 Census" "Demographic Yearbook" "04/06/2005" TRUE TRUE
+558 407410110248 "Nicaragua" 1215 "Nicaragua 1950 Census" "Demographic Yearbook" "31/05/1950" TRUE TRUE
+558 1001701672476 "Nicaragua" 1135 "Nicaragua 1971 Census" "IPUMS International custom tabulations" "21/04/1971" TRUE TRUE
+558 1171327973206 "Nicaragua" 1215 "Nicaragua 1950 Census" "Mortality in developing countries" "01/05/1950" FALSE TRUE
+558 1662301868081 "Nicaragua" 1189 "Nicaragua 2005 Census" "IPUMS International custom tabulations" "03/06/2005" TRUE TRUE
+558 2193317230238 "Nicaragua" 1215 "Nicaragua 1950 Census" "Mortality in Developing Countries" "01/06/1950" TRUE TRUE
+558 2201531012916 "Nicaragua" 368 "Nicaragua 1963 Census" "Mortality in Developing Countries" "26/04/1963" TRUE TRUE
+558 2252109231224 "Nicaragua" 1252 "Nicaragua 1995 Census" "IPUMS International custom tabulations" "26/04/1995" TRUE TRUE
+558 6426175209221 "Nicaragua" 1252 "Nicaragua 1995 Census" "CELADE" "26/04/1995" TRUE TRUE
+558 8812511482105 "Nicaragua" 368 "Nicaragua 1963 Census" "Demographic Yearbook" "25/04/1963" TRUE TRUE
+558 15820562147162 "Nicaragua" 1135 "Nicaragua 1971 Census" "Demographic Yearbook" "20/04/1971" TRUE TRUE
+591 21143565104 "Panama" 1178 "Panama 1970 Census" "Mortality in developing countries" "01/05/1970" FALSE TRUE
+591 52295559212 "Panama" 1139 "Panama 1950 Census" "Mortality in developing countries" "01/12/1950" FALSE TRUE
+591 1131362133170 "Panama" 291 "Panama 1980 Census" "Demographic Yearbook" "11/05/1980" TRUE TRUE
+591 1821948910632 "Panama" 1139 "Panama 1950 Census" "Demographic Yearbook" "10/12/1950" TRUE TRUE
+591 2454219162213 "Panama" 920 "Panama 1960 Census" "Demographic Yearbook" "11/12/1960" TRUE TRUE
+591 4567168254154 "Panama" 1203 "Panama 2000 Census" "Demographic Yearbook" "14/05/2000" TRUE TRUE
+591 7149222237175 "Panama" 4754 "Panama 2010 Census" "Demographic Yearbook" "16/05/2010" NA NA
+591 9523511071115 "Panama" 63 "Panama 1990 Census" "Demographic Yearbook" "13/05/1990" TRUE TRUE
+591 10515845156146 "Panama" 920 "Panama 1960 Census" "Mortality in developing countries" "01/12/1960" FALSE TRUE
+591 60109190182184 "Panama" 1139 "Panama 1950 Census" "Mortality in Developing Countries" "11/12/1950" TRUE TRUE
+591 125180107117181 "Panama" 4754 "Panama 2010 Census" "CELADE" "16/05/2010" TRUE TRUE
+600 49910924330 "Paraguay" 1257 "Paraguay 2002 Census" "Demographic Yearbook" "28/08/2002" TRUE TRUE
+600 94641164339 "Paraguay" 1268 "Paraguay 1992 Census" "IPUMS International custom tabulations" "27/08/1992" TRUE TRUE
+600 129214022260 "Paraguay" 1461 "Paraguay 1972 Census" "IPUMS International custom tabulations" "10/07/1972" TRUE TRUE
+600 171355677255 "Paraguay" 1417 "Paraguay 1950 Census" "Demographic Yearbook" "28/10/1950" TRUE TRUE
+600 331552457238 "Paraguay" 1461 "Paraguay 1972 Census" "Demographic Yearbook" "09/07/1972" TRUE TRUE
+600 689213219284 "Paraguay" 1051 "Paraguay 1962 Census" "Mortality in developing countries" "01/10/1962" FALSE TRUE
+600 1362002424156 "Paraguay" 1257 "Paraguay 2002 Census" "IPUMS International custom tabulations" "29/08/2002" TRUE TRUE
+600 1846328134157 "Paraguay" 4770 "Paraguay 2012 Census" "CELADE" "16/10/2012" TRUE TRUE
+600 10123916810230 "Paraguay" 1051 "Paraguay 1962 Census" "Demographic Yearbook" "14/10/1962" TRUE TRUE
+600 11510314626206 "Paraguay" 1051 "Paraguay 1962 Census" "IPUMS International custom tabulations" "15/10/1962" TRUE FALSE
+600 12222442104182 "Paraguay" 1384 "Paraguay 1982 Census" "Demographic Yearbook" "11/07/1982" TRUE TRUE
+600 21991242143118 "Paraguay" 1268 "Paraguay 1992 Census" "Demographic Yearbook" "26/08/1992" TRUE TRUE
+600 23684194206123 "Paraguay" 1384 "Paraguay 1982 Census" "IPUMS International custom tabulations" "12/07/1982" TRUE TRUE
+604 292211428147 "Peru" 339 "Peru 1981 Census" "Demographic Yearbook" "12/07/1981" TRUE TRUE
+604 1075324466216 "Peru" 1196 "Peru 1961 Census" "Demographic Yearbook" "02/07/1961" TRUE TRUE
+604 7892255232151 "Peru" 1614 "Peru 2005 Census" "Demographic Yearbook" "18/07/2005" TRUE TRUE
+604 8212625546164 "Peru" 1562 "Peru 1972 Census" "Demographic Yearbook" "04/06/1972" TRUE TRUE
+604 9215412813072 "Peru" 1021 "Peru 1993 Census" "IPUMS International custom tabulations" "12/07/1993" TRUE TRUE
+604 9515559124254 "Peru" 1021 "Peru 1993 Census" "CELADE" "01/01/1993" TRUE TRUE
+604 17311214517751 "Peru" 1196 "Peru 1961 Census" "Mortality in developing countries" "01/07/1961" FALSE TRUE
+604 21220721200132 "Peru" 7299 "Peru 2017 Census" "Demographic Yearbook" "22/08/2017" TRUE TRUE
+604 22999214240228 "Peru" 354 "Peru 2007 Census" "Demographic Yearbook" "21/10/2007" TRUE TRUE
+604 23021217261144 "Peru" 354 "Peru 2007 Census" "IPUMS International custom tabulations" "27/10/2007" TRUE TRUE
+604 165169247198111 "Peru" 354 "Peru 2007 Census" "Demographic Yearbook" "21/10/2007" NA NA
+630 186581471551 "Puerto Rico" 1131 "Puerto Rico 1980 Census" "Demographic Yearbook" "01/04/1980" TRUE TRUE
+630 195146116324 "Puerto Rico" 391 "Puerto Rico 1990 Census" "IPUMS International custom tabulations" "02/04/1990" TRUE TRUE
+630 751369198235 "Puerto Rico" 391 "Puerto Rico 1990 Census" "Demographic Yearbook" "01/04/1990" TRUE TRUE
+630 898932138118 "Puerto Rico" 1204 "Puerto Rico 1970 Census" "Demographic Yearbook" "01/04/1970" FALSE TRUE
+630 1462032157865 "Puerto Rico" 1626 "Puerto Rico 2000 Census" "Demographic Yearbook" "01/04/2000" NA FALSE
+630 1961218614143 "Puerto Rico" 1626 "Puerto Rico 2000 Census" "Demographic Yearbook" "01/04/2000" TRUE FALSE
+630 2072263119120 "Puerto Rico" 1131 "Puerto Rico 1980 Census" "IPUMS International custom tabulations" "02/04/1980" TRUE TRUE
+630 3310510547119 "Puerto Rico" 1204 "Puerto Rico 1970 Census" "IPUMS International custom tabulations" "02/04/1970" TRUE TRUE
+630 7916115010736 "Puerto Rico" 4755 "Puerto Rico 2010 Census" "IPUMS International custom tabulations" "02/04/2010" TRUE TRUE
+630 9919518280123 "Puerto Rico" 4755 "Puerto Rico 2010 Census" "Demographic Yearbook" "04/01/2010" TRUE TRUE
+630 12429117101210 "Puerto Rico" 2523 "Puerto Rico 1950 Census" "Demographic Yearbook" "01/04/1950" TRUE TRUE
+630 12720643210190 "Puerto Rico" 4755 "Puerto Rico 2010 Census" "Demographic Yearbook" "01/04/2010" TRUE TRUE
+630 22711999144157 "Puerto Rico" 1009 "Puerto Rico 1960 Census" "Demographic Yearbook" "01/04/1960" TRUE TRUE
+630 97239193173112 "Puerto Rico" 1626 "Puerto Rico 2000 Census" "IPUMS International custom tabulations" "02/04/2000" TRUE TRUE
+662 181639914200 "Saint Lucia" 1136 "Saint Lucia 1991 Census" "Demographic Yearbook" "12/05/1991" TRUE TRUE
+662 2142056510182 "Saint Lucia" 1552 "Saint Lucia 2001 Census" "Demographic Yearbook" "22/05/2001" TRUE TRUE
+662 17218119616150 "Saint Lucia" 1474 "Saint Lucia 1980 Census" "Demographic Yearbook" "12/05/1980" TRUE TRUE
+662 18824864113168 "Saint Lucia" 4757 "Saint Lucia 2010 Census" "Demographic Yearbook" "10/05/2010" NA NA
+662 21522427150184 "Saint Lucia" 4757 "Saint Lucia 2010 Census" "CELADE" "12/05/2010" TRUE TRUE
+662 25022920101150 "Saint Lucia" 1474 "Saint Lucia 1980 Census" "IPUMS International custom tabulations" "13/05/1980" TRUE TRUE
+662 74181216140188 "Saint Lucia" 1136 "Saint Lucia 1991 Census" "IPUMS International custom tabulations" "13/05/1991" TRUE TRUE
+662 240115213201206 "Saint Lucia" 4757 "Saint Lucia 2010 Census" "Demographic Yearbook" "10/05/2010" NA NA
+670 19862456843 "Saint Vincent and the Grenadines" 5277 "Saint Vincent and the Grenadines 2012 Census" "Demographic Yearbook" "12/06/2012" NA NA
+670 332191842377 "Saint Vincent and the Grenadines" 5277 "Saint Vincent and the Grenadines 2012 Census" "CELADE 2020" "13/06/2012" TRUE TRUE
+670 18820222189117 "Saint Vincent and the Grenadines" 1147 "Saint Vincent and the Grenadines 1980 Census" "Demographic Yearbook" "12/05/1980" TRUE TRUE
+670 118133132158138 "Saint Vincent and the Grenadines" 1390 "Saint Vincent and the Grenadines 2001 Census" "Demographic Yearbook" "12/06/2001" TRUE TRUE
+670 180246138134231 "Saint Vincent and the Grenadines" 377 "Saint Vincent and the Grenadines 1991 Census" "Demographic Yearbook" "12/05/1991" TRUE TRUE
+740 19854812302 "Suriname" 319 "Suriname 1964 Census" "Demographic Yearbook" "31/03/1964" TRUE TRUE
+740 59188195835 "Suriname" 319 "Suriname 1964 Census" "Mortality in developing countries" "01/03/1964" FALSE TRUE
+740 962187821577 "Suriname" 325 "Suriname 2004 Census" "Demographic Yearbook" "31/03/2003" NA NA
+740 1310722547189 "Suriname" 325 "Suriname 2004 Census" "Demographic Yearbook" "02/08/2004" TRUE TRUE
+740 2351025916619 "Suriname" 3311 "Suriname 1950 Census" "Demographic Yearbook" "31/10/1950" TRUE TRUE
+740 9821819386219 "Suriname" 5282 "Suriname 2012 Census" "Demographic Yearbook" "13/08/2012" TRUE TRUE
+740 14113120712448 "Suriname" 325 "Suriname 2004 Census" "Demographic Yearbook" "02/08/2004" NA NA
+780 21882425083 "Trinidad and Tobago" 1140 "Trinidad and Tobago 1970 Census" "Demographic Yearbook" "07/04/1970" TRUE TRUE
+780 220127174654 "Trinidad and Tobago" 5278 "Trinidad and Tobago 2011 Census" "IPUMS International custom tabulations" "30/01/2011" TRUE TRUE
+780 558470142164 "Trinidad and Tobago" 5278 "Trinidad and Tobago 2011 Census" "Demographic Yearbook" "09/01/2011" TRUE TRUE
+780 892152547422 "Trinidad and Tobago" 1140 "Trinidad and Tobago 1970 Census" "IPUMS International custom tabulations" "08/04/1970" TRUE TRUE
+780 1265186161232 "Trinidad and Tobago" 1094 "Trinidad and Tobago 1960 Census" "Demographic Yearbook" "07/04/1960" TRUE TRUE
+780 1351371182218 "Trinidad and Tobago" 1238 "Trinidad and Tobago 1980 Census" "IPUMS International custom tabulations" "13/05/1980" TRUE TRUE
+780 1721082232136 "Trinidad and Tobago" 949 "Trinidad and Tobago 2000 Census" "IPUMS International custom tabulations" "16/05/2000" TRUE TRUE
+780 2462418543151 "Trinidad and Tobago" 1423 "Trinidad and Tobago 1990 Census" "IPUMS International custom tabulations" "03/05/1990" TRUE TRUE
+780 14921475215181 "Trinidad and Tobago" 1423 "Trinidad and Tobago 1990 Census" "Demographic Yearbook" "02/05/1990" NA NA
+780 18368221170124 "Trinidad and Tobago" 5278 "Trinidad and Tobago 2011 Census" "Demographic Yearbook" "09/01/2011" TRUE TRUE
+780 18413746101106 "Trinidad and Tobago" 949 "Trinidad and Tobago 2000 Census" "CELADE 2020" "16/05/2000" TRUE TRUE
+780 19123911284178 "Trinidad and Tobago" 1238 "Trinidad and Tobago 1980 Census" "Demographic Yearbook" "12/05/1980" TRUE TRUE
+780 20211247136133 "Trinidad and Tobago" 1423 "Trinidad and Tobago 1990 Census" "CELADE 2020" "03/05/1990" TRUE TRUE
+850 2922225181 "United States Virgin Islands" 4762 "United States Virgin Islands 2010 Census" "Demographic Yearbook" "01/04/2010" NA NA
+850 17126153178 "United States Virgin Islands" 945 "United States Virgin Islands 1990 Census" "Demographic Yearbook" "01/04/1990" NA NA
+850 72022272378 "United States Virgin Islands" 1053 "United States Virgin Islands 1960 Census" "Demographic Yearbook" "01/04/1960" TRUE FALSE
+850 1591581895242 "United States Virgin Islands" 1642 "United States Virgin Islands 1980 Census" "Demographic Yearbook" "01/04/1980" TRUE TRUE
+858 4912635789 "Uruguay" 1195 "Uruguay 1975 Census" "IPUMS International custom tabulations" "22/05/1975" TRUE TRUE
+858 15246764933 "Uruguay" 5283 "Uruguay 2011 Census" "IPUMS International custom tabulations" "06/10/2011" TRUE TRUE
+858 45246148187 "Uruguay" 3353 "Uruguay 2004 Census" "Demographic Yearbook" "01/06/2004" TRUE TRUE
+858 52230715112 "Uruguay" 1195 "Uruguay 1975 Census" "Mortality in developing countries" "01/05/1975" FALSE TRUE
+858 162523619234 "Uruguay" 241 "Uruguay 1985 Census" "IPUMS International custom tabulations" "24/10/1985" TRUE TRUE
+858 391597977182 "Uruguay" 5283 "Uruguay 2011 Census" "Demographic Yearbook" "10/04/2011" TRUE TRUE
+858 1272377694244 "Uruguay" 1091 "Uruguay 1996 Census" "IPUMS International custom tabulations" "23/05/1996" TRUE TRUE
+858 2184155201192 "Uruguay" 241 "Uruguay 1985 Census" "Demographic Yearbook" "23/10/1985" TRUE TRUE
+858 6133222145224 "Uruguay" 1121 "Uruguay 1963 Census" "Mortality in developing countries" "01/10/1963" FALSE TRUE
+858 6533155101172 "Uruguay" 1121 "Uruguay 1963 Census" "Demographic Yearbook" "16/10/1963" TRUE TRUE
+858 14510218716110 "Uruguay" 1091 "Uruguay 1996 Census" "Demographic Yearbook" "22/05/1996" TRUE TRUE
+858 16895115147200 "Uruguay" 5283 "Uruguay 2011 Census" "Demographic Yearbook" "04/10/2011" TRUE TRUE
+858 18710840154141 "Uruguay" 1121 "Uruguay 1963 Census" "IPUMS International custom tabulations" "17/10/1963" TRUE TRUE
+858 51158131221154 "Uruguay" 1195 "Uruguay 1975 Census" "CELADE" "22/05/1975" TRUE TRUE
+862 208191223591 "Venezuela (Bolivarian Republic of)" 1302 "Venezuela (Bolivarian Republic of) 1950 Census" "Demographic Yearbook" "26/11/1950" TRUE TRUE
+862 341837194169 "Venezuela (Bolivarian Republic of)" 918 "Venezuela (Bolivarian Republic of) 1961 Census" "Mortality in developing countries" "01/02/1961" FALSE TRUE
+862 1472158155198 "Venezuela (Bolivarian Republic of)" 1122 "Venezuela (Bolivarian Republic of) 1981 Census" "IPUMS International custom tabulations" "21/10/1981" TRUE TRUE
+862 1634417624243 "Venezuela (Bolivarian Republic of)" 1005 "Venezuela (Bolivarian Republic of) 2001 Census" "Demographic Yearbook" "30/10/2001" TRUE FALSE
+862 1721627722699 "Venezuela (Bolivarian Republic of)" 1005 "Venezuela (Bolivarian Republic of) 2001 Census" "IPUMS International custom tabulations" "31/10/2001" TRUE TRUE
+862 2012411936132 "Venezuela (Bolivarian Republic of)" 1122 "Venezuela (Bolivarian Republic of) 1981 Census" "Demographic Yearbook" "20/10/1981" TRUE TRUE
+862 2246511218979 "Venezuela (Bolivarian Republic of)" 1499 "Venezuela (Bolivarian Republic of) 1990 Census" "IPUMS International custom tabulations" "20/10/1990" TRUE TRUE
+862 2271651203580 "Venezuela (Bolivarian Republic of)" 1005 "Venezuela (Bolivarian Republic of) 2001 Census" "CELADE" "31/10/2001" TRUE TRUE
+862 4266134214145 "Venezuela (Bolivarian Republic of)" 1087 "Venezuela (Bolivarian Republic of) 1971 Census" "IPUMS International custom tabulations" "03/11/1971" TRUE TRUE
+862 10516267243128 "Venezuela (Bolivarian Republic of)" 1499 "Venezuela (Bolivarian Republic of) 1990 Census" "Demographic Yearbook" "20/10/1990" TRUE TRUE
+862 15513719024255 "Venezuela (Bolivarian Republic of)" 1302 "Venezuela (Bolivarian Republic of) 1950 Census" "Mortality in developing countries" "01/11/1950" FALSE TRUE
+862 19017960217209 "Venezuela (Bolivarian Republic of)" 918 "Venezuela (Bolivarian Republic of) 1961 Census" "Demographic Yearbook" "26/02/1961" TRUE TRUE
+862 53242100222149 "Venezuela (Bolivarian Republic of)" 1087 "Venezuela (Bolivarian Republic of) 1971 Census" "Demographic Yearbook" "02/11/1971" TRUE FALSE
+862 101118253233231 "Venezuela (Bolivarian Republic of)" 5284 "Venezuela (Bolivarian Republic of) 2011 Census" "Demographic Yearbook" "01/09/2011" TRUE TRUE
+862 106169198132174 "Venezuela (Bolivarian Republic of)" 5284 "Venezuela (Bolivarian Republic of) 2011 Census" "Demographic Yearbook" "09/01/2011" NA NA
