@@ -26,8 +26,11 @@ lapply( .packages, require, character.only = TRUE )
 
 ### Graphical check #-----------------------------
 
+outRevSurvx5 <- 
+  fread( 'outputs/reverse_survival_fertest_latin_america_x5.csv' )
+
 outRevSurv <- 
-  fread( 'outputs/reverse_survival_fertest_latin_america.csv')
+  fread( 'outputs/reverse_survival_fertest_latin_america.csv' )
 
 data('tfr')
 
@@ -54,13 +57,19 @@ wpp_tfr <-
 plot_out <- 
   outRevSurv %>% 
   merge( wpp_tfr[, .( name, LocID ) ] %>% unique,
-         by = 'LocID' )
+         by = 'LocID' )  
 
-pdf( file = 'figs/outputs_revsurv_latin_america.pdf', 
+plot_outx5 <- 
+  outRevSurvx5 %>% 
+  merge( wpp_tfr[, .( name, LocID ) ] %>% unique,
+         by = 'LocID' )  
+
+pdf( file = 'figs/outputs_revsurv_latin_america_x5.pdf', 
      width = 8, height = 6 )
 for( loc in ( plot_out$LocID %>% unique ) ){
   
   aux <- plot_out[ LocID == loc ]
+  aux_x5 <- plot_outx5[ LocID == loc ]
   wpp_aux <- wpp_tfr[ LocID == loc ]
   title_name <- paste0( aux$name %>% unique, ' - ', loc )
   
@@ -73,12 +82,18 @@ for( loc in ( plot_out$LocID %>% unique ) ){
   
   plot_this <- 
     ggplot() +
-    geom_point( data = aux,
+    geom_point( data = aux_x5,
                 aes( x = as.numeric( year ), 
                      y = as.numeric( TFR ) ), 
                 size  = 1.75,
                 shape = 1,
                 color = 'black') +
+    geom_point( data = aux,
+                aes( x = as.numeric( year ), 
+                     y = as.numeric( TFR ) ), 
+                size  = 1.75,
+                shape = 2,
+                color = 'blue') +
     geom_line( data = wpp_aux,
                aes( x = as.numeric( year ), y = as.numeric( TFR ) ),
                color = 'tomato3',
