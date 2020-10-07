@@ -198,12 +198,16 @@ pop_child <-
     beersmod <- 
       graduate( Value, Age, method = "beers(mod)", keep0 = keep0, johnson = TRUE )
     
+    sprague <-
+      graduate( Value, Age, method = 'sprague', keep0 = keep0 )
+    
     out <- 
       data.table(
         SeriesID = x,
         LocID    = aux$LocID %>% unique,
         AgeLabel = 0:14,
-        DataValueNew = beersmod[ c( paste0(0:14) ) ]
+        DataValueBeers   = beersmod[ c( paste0(0:14) ) ],
+        DataValueSprague = sprague[ c( paste0(0:14) ) ]
       )
     
     return( out )
@@ -219,7 +223,8 @@ pop_child <- do.call( rbind, pop_child )
 # and select required variables for reverse survival estimation
 pop_child <- 
   pop_child[ ,
-             .( pop_c = sum( DataValueNew ) ),
+             .( pop_c_beers = sum( DataValueBeers ),
+                pop_c_spgue = sum( DataValueSprague ) ),
              .( SeriesID, LocID, 
                 Age = as.numeric( AgeLabel ) ) ] %>%
   setorder( LocID, SeriesID, Age ) %>%
@@ -240,10 +245,11 @@ pop_females <-
 series <- 
   ids_ungroup
 
-RevSurvEstimates <- 
+RevSurvEstimatesBeers <- 
   lapply( series, function( x ){
     
     aux_c <- pop_child[ SeriesID == x ] 
+    aux_c[ , pop_c := pop_c_beers ]
     aux_f <- pop_females[ SeriesID == x ]
     
     if( !is_age_sequential( aux_c$Age ) | !is_age_sequential( aux_f$Age )  ){
@@ -352,9 +358,131 @@ RevSurvEstimates <-
     return( outRevSurv )
   } )
 
-outRevSurv <- do.call( rbind, RevSurvEstimates )
+outRevSurvBeers <- do.call( rbind, RevSurvEstimatesBeers )
 
-write.table( outRevSurv, 'outputs/reverse_survival_fertest_latin_america_x5.csv', 
+RevSurvEstimatesSprague <- 
+  lapply( series, function( x ){
+    
+    aux_c <- pop_child[ SeriesID == x ] 
+    aux_c[ , pop_c := pop_c_spgue ]
+    aux_f <- pop_females[ SeriesID == x ]
+    
+    if( !is_age_sequential( aux_c$Age ) | !is_age_sequential( aux_f$Age )  ){
+      paste0( 'SeriesID number ', x, ' not in sequencial age format!!!')
+    }
+    
+    date_ref <- unique( c( aux_f$DateFormtd, aux_c$DateFormtd )  )
+    date_ref_dec <- decimal_anydate( date_ref ) # reference date in decimal
+    loc <- aux_c$LocID %>% unique
+    
+    popx5_w = aux_f$pop_w
+    ages5_w = aux_f$Age %>% unique
+    popx1_c = aux_c$pop_c
+    ages1_c = aux_c$Age %>% unique
+    
+    # 1) get child 0-5 mortality probability for reference period
+    #    reference period - 5 and reference period - 10
+    ltb_ref <- getWPP2019LT( locations = loc,
+                             year = date_ref_dec,
+                             sex = 'both' )
+    ltb_ref5 <- getWPP2019LT( locations = loc,
+                              year = ( date_ref_dec - 5 ),
+                              sex = 'both' )
+    ltb_ref10 <- getWPP2019LT( locations = loc,
+                               year = ( date_ref_dec - 10 ),
+                               sex = 'both' )
+    
+    q1  <-  
+      ( ltb_ref$lx[ ltb_ref$x == 0 ] - ltb_ref$lx[ ltb_ref$x == 5 ] ) /
+      ltb_ref$lx[ ltb_ref$x == 0 ]
+    q2  <-  
+      ( ltb_ref5$lx[ ltb_ref5$x == 0 ] - ltb_ref5$lx[ ltb_ref5$x == 5 ] ) /
+      ltb_ref5$lx[ ltb_ref5$x == 0 ]
+    q3  <-  
+      ( ltb_ref10$lx[ ltb_ref10$x == 0 ] - ltb_ref10$lx[ ltb_ref10$x == 5 ] ) /
+      ltb_ref10$lx[ ltb_ref10$x == 0 ]
+    
+    q0_5 <- c( q1, q2, q3 )
+    
+    # 2) get female q15_45 mortality probability for 
+    # reference period(q1f), reference period - 5 (q2f), and reference period - 10 (q3f)
+    
+    ltf_ref <- getWPP2019LT( locations = loc,
+                             year = date_ref_dec,
+                             sex = 'female' )
+    ltf_ref5 <- getWPP2019LT( locations = loc,
+                              year = ( date_ref_dec - 5 ),
+                              sex = 'female' )
+    ltf_ref10 <- getWPP2019LT( locations = loc,
+                               year = ( date_ref_dec - 10 ),
+                               sex = 'female' )
+    
+    q1f  <-  
+      ( ltf_ref$lx[ ltf_ref$x == 15 ] - ltf_ref$lx[ ltf_ref$x == 45 ] ) /
+      ltf_ref$lx[ ltf_ref$x == 15 ]
+    q2f  <-  
+      ( ltf_ref5$lx[ ltf_ref5$x == 15 ] - ltf_ref5$lx[ ltf_ref5$x == 45 ] ) /
+      ltf_ref5$lx[ ltf_ref5$x == 15 ]
+    q3f  <-  
+      ( ltf_ref10$lx[ ltf_ref10$x == 15 ] - ltf_ref10$lx[ ltf_ref10$x == 45 ] ) /
+      ltf_ref10$lx[ ltf_ref10$x == 15 ]
+    
+    q15_45f <- c( q1f, q2f, q3f )
+    
+    # 3) get female lx5 values matching ages
+    lx5_w <- ltf_ref$lx[ ltf_ref$x %in% ages5_w ]
+    
+    # 4) get children lx1 values matching ages using ungroup pclm function
+    lts_model <- pclm( x = ltb_ref$x[ 2:22 ],
+                       y = ltb_ref$dx[ 2:22 ],
+                       nlast = 1,
+                       offset = ltb_ref$Lx[ 2:22 ] )
+    lts <-
+      LifeTable( x = 0:99,
+                 mx = c( ltb_ref$mx[1], fitted( lts_model )[ 1:99 ] ),
+                 lx0 = 1,
+                 sex = 'total' )$lt
+    
+    lx1_c <- lts$lx[ lts$x %in% 0:15 ]
+    
+    # 5) get fertility profile for current year and previous 15 period
+    
+    asfr <- FetchFertilityWpp2019( locations = loc,
+                                   year =  date_ref_dec )$asfr
+    
+    if( ( date_ref_dec - 15 ) < 1950 ){
+      asfr_15prior <- asfr
+    } else{
+      asfr_15prior <- FetchFertilityWpp2019( locations = loc,
+                                             year = ( date_ref_dec - 15 ) )$asfr
+    }
+    
+    
+    # 6) run function
+    cat( 'Country:', loc )
+    outRevSurv <- 
+      data.table(
+        LocID = loc,
+        SeriesID = x,
+        DateFormtd = date_ref,
+        FertRevSurv( ages1_c, popx1_c, ages5_w, popx5_w, lx1_c, lx5_w,
+                     asfr, asfr_15prior,
+                     q0_5, q15_45f, date_ref )
+      )
+    
+    return( outRevSurv )
+  } )
+
+outRevSurvSprague <- do.call( rbind, RevSurvEstimatesSprague )
+
+outRevSurv <- 
+  rbind(
+    outRevSurvSprague[ , TypeEst := 'Abridged-Sprague'],
+    outRevSurvBeers[ , TypeEst := 'Abridged-BeersModified']
+  )
+
+write.table( outRevSurv, 
+             file = 'outputs/reverse_survival_fertest_latin_america_x5.csv', 
              row.names = F )
 
 ##################################################

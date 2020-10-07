@@ -26,11 +26,19 @@ lapply( .packages, require, character.only = TRUE )
 
 ### Graphical check #-----------------------------
 
+# select IDs to remove after visual inspection
+manual_rmv_ids_x5 <-
+  ( fread( 'aux_docs/manually_removed_ids_x5.csv' ) %>%
+      .[ Remove == 'yes', ] )$SeriesID %>% as.numeric
+
 outRevSurvx5 <- 
-  fread( 'outputs/reverse_survival_fertest_latin_america_x5.csv' )
+  fread( 'outputs/reverse_survival_fertest_latin_america_x5.csv' ) %>%
+  .[ !( as.numeric( SeriesID ) %in% manual_rmv_ids_x5 ) ]
 
 outRevSurv <- 
   fread( 'outputs/reverse_survival_fertest_latin_america.csv' )
+
+
 
 data('tfr')
 
@@ -64,13 +72,19 @@ plot_outx5 <-
   merge( wpp_tfr[, .( name, LocID ) ] %>% unique,
          by = 'LocID' )  
 
+plot_all <- 
+  rbind(
+    wpp_tfr[, .( LocID, name, year, TFR, TypeEst = 'WPP 2019' ) ],
+    plot_out[, .( LocID, name, year, TFR, TypeEst = 'RevSurv (x1)' ) ],
+    plot_outx5[, .( LocID, name, year, TFR, TypeEst ) ]
+  )
+
 pdf( file = 'figs/outputs_revsurv_latin_america_x5.pdf', 
      width = 8, height = 6 )
-for( loc in ( plot_out$LocID %>% unique ) ){
+for( loc in ( plot_all$LocID %>% unique ) ){
   
-  aux <- plot_out[ LocID == loc ]
-  aux_x5 <- plot_outx5[ LocID == loc ]
-  wpp_aux <- wpp_tfr[ LocID == loc ]
+  aux <- plot_all[ LocID == loc ]
+  
   title_name <- paste0( aux$name %>% unique, ' - ', loc )
   
   if( loc == 740 ){
@@ -82,40 +96,34 @@ for( loc in ( plot_out$LocID %>% unique ) ){
   
   plot_this <- 
     ggplot() +
-    geom_point( data = aux_x5,
-                aes( x = as.numeric( year ), 
-                     y = as.numeric( TFR ) ), 
-                size  = 1.75,
-                shape = 1,
-                color = 'black') +
     geom_point( data = aux,
                 aes( x = as.numeric( year ), 
-                     y = as.numeric( TFR ) ), 
-                size  = 1.75,
-                shape = 2,
-                color = 'blue') +
-    geom_line( data = wpp_aux,
-               aes( x = as.numeric( year ), y = as.numeric( TFR ) ),
-               color = 'tomato3',
+                     y = as.numeric( TFR ),
+                     shape = TypeEst,
+                     color = TypeEst ), 
+                size  = 1.75 ) +
+    geom_line( data = aux,
+               aes( x = as.numeric( year ), 
+                    y = as.numeric( TFR ),
+                    color = TypeEst, linetype = TypeEst ),
                size  = 1.25 ) +
-    geom_line( data = data.frame( x = c( 1930, 1933 ), y = c( 1.80, 1.80 ) ),
-               aes( x = x, y = y ),
-               size = 1.25, 
-               color = 'tomato3' ) +
-    geom_point( data = data.frame( x = c( 1931.5 ), y = c( 1.5 ) ),
-                aes( x = x, y = y ),
-                size = 1.75, 
-                shape = 1,
-                color = 'black' ) +
-    annotate( 'text', x = 1933.25, y = 1.80, label = 'WPP 2019', hjust = 0 ) +
-    annotate( 'text', x = 1933.25, y = 1.50, label = 'Reverse Survival', hjust = 0 ) +
     scale_y_continuous( breaks = scales::breaks_pretty( 9 ) ) +
     scale_x_continuous( limits = c( 1930, 2030 ), 
                         breaks = seq( 1930, 2030, 10 ) ) +
-    scale_color_manual( values = c( 'revsurv' = 'black',
-                                    'wpp'     = 'red' ),
-                        labels = c( 'revsurv' = 'Reverse Survival\nEstimates',
-                                    'wpp'     = 'WPP 2019' ),
+    scale_color_manual( values = c( 'Abridged-BeersModified' = 'forestgreen',
+                                    'Abridged-Sprague' = 'steelblue3',
+                                    'RevSurv (x1)'  = 'black',
+                                    'WPP 2019' = 'tomato3'),
+                        name = '' ) +
+    scale_shape_manual( values = c( 'Abridged-BeersModified' = 4,
+                                    'Abridged-Sprague' = 1,
+                                    'RevSurv (x1)'  = 18,
+                                    'WPP 2019' = 20 ),
+                        name = '' ) +
+    scale_linetype_manual( values = c( 'Abridged-BeersModified' = 'blank',
+                                       'Abridged-Sprague' = 'blank',
+                                       'RevSurv (x1)'  = 'blank',
+                                       'WPP 2019' = 'solid' ),
                         name = '' ) +
     labs( title = title_name, 
           subtitle = subt,
@@ -127,7 +135,8 @@ for( loc in ( plot_out$LocID %>% unique ) ){
       axis.text = element_text( size = 10, color = 'black' ),
       plot.title = element_text( size = 15, color = 'black' ),
       plot.subtitle = element_text( size = 12, color = 'black' ),
-      panel.grid.major = element_line( size = 0.15, color = 'gray81', linetype = 5 )
+      panel.grid.major = element_line( size = 0.15, color = 'gray81', 
+                                       linetype = 5 )
     ) 
   
   print( plot_this )
@@ -135,3 +144,63 @@ for( loc in ( plot_out$LocID %>% unique ) ){
 }
 dev.off()
 ##################################################
+
+### check implausible cases
+
+ids <- c( 28, 152, 214, 254, 312, 388, 474, 558, 740, 862 )
+
+myLocations <- 
+  ( outRevSurvx5[ LocID %in% ids & TFR > 9, .( LocID, SeriesID ) ] %>% 
+      unique )
+
+myPop <- 
+  lapply( ids, function(x) {
+    
+    filterSeries <- myLocations[ LocID == x ]$SeriesID
+    
+    res <- get_recorddata( dataProcessTypeIds = 2,  ## "Census"
+                           startYear = 1950,
+                           endYear = 2020,
+                           indicatorTypeIds = 8,    ## "Population by age and sex"
+                           isComplete = 0,          ## 0 = Abridged or 1 = Complete
+                           locIds = x,              ## "Brazil"
+                           locAreaTypeIds = 2,      ## "Whole area"
+                           subGroupIds = 2 )        ## "Total or All groups"
+    setDT( res )
+    
+    # select specific variables and sort
+    resFilt <- 
+      res[ as.numeric( SeriesID ) %in%  as.numeric( filterSeries ), 
+          list( SeriesID, LocID, LocName,  DataCatalogName, DataSourceName, 
+                DataSourceAuthor, DataSourceYear, 
+                TimeStart, TimeMid, TimeLabel, SexID, AgeStart,                         ## data values
+                AgeEnd, AgeLabel, DataValue ) ] %>%
+      setorder( LocID, SeriesID, SexID, AgeStart )
+    
+    # split totals and unkown in different columns
+    resFilt[, DataValueUnknown := DataValue[ AgeLabel == 'Unknown' ],
+            .( LocID, SeriesID, SexID ) ]
+    resFilt[, DataValueTotal := DataValue[ AgeLabel == 'Total' ],
+            .( LocID, SeriesID, SexID ) ]
+    # if Total is missing assign DataValue sum
+    resFilt[, DataValueTotal := ifelse( is.na( DataValueTotal ), 
+                                        sum( DataValue ),
+                                        DataValueTotal ),
+            .( LocID, SeriesID, SexID ) ]
+    # remove totals and unknown labels from database AgeLabel and Both Sexes counts
+    resFilt <- 
+      resFilt[ ! ( AgeLabel %in% c( 'Unknown', 'Total' ) ) & 
+                 SexID %in% c( 1, 2 ), ] %>%
+      setorder( SeriesID, SexID, AgeStart ) 
+    
+    # return the result
+    return( resFilt )
+  })
+
+check_pop <- do.call( rbind, myPop )
+
+check_pop[ AgeStart<15,
+           .( count = sum( DataValue ) ),
+           .( SeriesID,LocID,DataCatalogName,
+              DataSourceName,AgeStart,AgeEnd,AgeLabel ) ] %>%
+  View

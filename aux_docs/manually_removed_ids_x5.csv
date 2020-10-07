@@ -1,0 +1,15 @@
+SeriesID,LocID,DataCatalogName,DataSourceName,Note,EqualDataSerie,Obs,Remove
+65323616782,28,Antigua and Barbuda 2011 Census,2011 census,Implausible 0-4 age group count,28154137154118,,yes
+2344910325109,152,Chile 1970 Census,Mortality in developing countries,Implausible 0-1 age group count,30209592025,,yes
+5184723564,214,Dominican Republic 1970 Census,Mortality in developing countries,Implausible 0-1 age group count,1915818312045,,yes
+4517521223951,254,French Guiana 1954 Census,Mortality in developing countries,Implausible 0-1 age group count,-,,yes
+174235791827,312,Guadeloupe 1967 Census,Mortality in developing countries,Implausible 0-1 age group count,1742246171132,,yes
+1792104417986,312,Guadeloupe 1961 Census,Mortality in developing countries,Implausible 0-1 age group count,5910065132201,Not in estimates because adult females info is missing,yes
+11123576197248,312,Guadeloupe 1954 Census,Mortality in developing countries,Implausible 0-1 age group count,-,,yes
+236511564213,474,Martinique 1967 Census,Mortality in developing countries,Implausible 0-1 age group count,1531372491260,,yes
+2121130152201,474,Martinique 1961 Census,Mortality in developing countries,Implausible 0-1 age group count,1611261989169,,yes
+17421362145112,474,Martinique 1954 Census,Mortality in developing countries,Implausible 0-1 age group count,3518259254188,Not in estimates because adult females info is missing,yes
+158236140106148,558,Nicaragua 1971 Census,Mortality in developing countries,Implausible 0-1 age group count,172181188199197,,yes
+14419613419492,662,Saint Lucia 1970 Census,Demographic Yearbook,Possible data quality issue 0-1 age group count,-,-,no
+1392188246140,740,Suriname 1972 Census,Mortality in developing countries,Implausible 0-1 age group count,-,,yes
+2291050988,862,Venezuela (Bolivarian Republic of) 1971 Census,Mortality in developing countries,Implausible 0-1 age group count,250691857218,,yes
