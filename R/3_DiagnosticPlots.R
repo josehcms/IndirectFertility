@@ -108,7 +108,7 @@ for( loc in ( plot_all$LocID %>% unique ) ){
                     color = TypeEst, linetype = TypeEst ),
                size  = 1.25 ) +
     scale_y_continuous( breaks = scales::breaks_pretty( 9 ) ) +
-    scale_x_continuous( limits = c( 1930, 2030 ), 
+    scale_x_continuous( limits = c( 1930, 2020 ), 
                         breaks = seq( 1930, 2030, 10 ) ) +
     scale_color_manual( values = c( 'Abridged-BeersModified' = 'forestgreen',
                                     'Abridged-Sprague' = 'steelblue3',
