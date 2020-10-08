@@ -81,14 +81,13 @@ plot_all <-
 
 pdf( file = 'figs/outputs_revsurv_latin_america_x5.pdf', 
      width = 8, height = 6 )
-for( loc in ( plot_all$LocID %>% unique ) ){
+for( loc in sort( plot_all$LocID %>% unique ) ){
   
   aux <- plot_all[ LocID == loc ]
   
   title_name <- paste0( aux$name %>% unique, ' - ', loc )
   
   if( loc == 740 ){
-    subt = '*Removed 1963 estimate of Suriname 1964 Census due to implausible 0-1 children counts'
     aux <- aux[ TFR < 20, ]
   } else{
     subt = ''

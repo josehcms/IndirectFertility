@@ -285,7 +285,7 @@ RevSurvEstimates <-
 
 outRevSurv <- do.call( rbind, RevSurvEstimates )
 
-write.table( outRevSurv, 'outputs/reverse_survival_fertest_latin_america.csv', 
+write.table( outRevSurv, 'outputs/reverse_survival_fertest_latin_america_x1.csv', 
              row.names = F )
 ##################################################
 
