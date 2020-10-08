@@ -36,7 +36,7 @@ outRevSurvx5 <-
   .[ !( as.numeric( SeriesID ) %in% manual_rmv_ids_x5 ) ]
 
 outRevSurv <- 
-  fread( 'outputs/reverse_survival_fertest_latin_america.csv' )
+  fread( 'outputs/reverse_survival_fertest_latin_america_x1.csv' )
 
 
 
