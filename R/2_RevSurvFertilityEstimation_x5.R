@@ -40,7 +40,7 @@ source( 'R/aux_functions.R' )
 
 ### Read UNPD saved data #------------------------
 pop_data <- 
-  fread('data/latin_america_census_demodata_agex5_sex.csv') %>%
+  fread('data/world_census_demodata_agex5_sex.csv') %>%
   .[, SeriesID := as.numeric( SeriesID ) ]
 
 ##################################################
@@ -113,7 +113,10 @@ ids_ungroup <-
                                  .[ N %in% c( 3 ) & AgeLabel %in% c( '0', '1-4' ) ,
                                     .( SeriesID, LocID, SexID, AgeStart, 
                                        AgeEnd, AgeLabel, DataValue ) ] )$SeriesID %>% 
-                               unique ) %>% unique ) ) ) ] 
+                               unique,
+                             602031251235,
+                             58313328107,
+                             1931149610453 ) %>% unique ) ) ) ] 
 
 
 pop_child <- 
@@ -360,6 +363,10 @@ RevSurvEstimatesBeers <-
 
 outRevSurvBeers <- do.call( rbind, RevSurvEstimatesBeers )
 
+write.table( outRevSurvBeers, 
+             file = 'outputs/reverse_survival_fertest_world_x5_beers.csv', 
+             row.names = F )
+
 RevSurvEstimatesSprague <- 
   lapply( series, function( x ){
     
@@ -475,6 +482,10 @@ RevSurvEstimatesSprague <-
 
 outRevSurvSprague <- do.call( rbind, RevSurvEstimatesSprague )
 
+write.table( outRevSurvSprague, 
+             file = 'outputs/reverse_survival_fertest_world_x5_sprague.csv', 
+             row.names = F )
+
 outRevSurv <- 
   rbind(
     outRevSurvSprague[ , TypeEst := 'Abridged-Sprague'],
@@ -482,7 +493,7 @@ outRevSurv <-
   )
 
 write.table( outRevSurv, 
-             file = 'outputs/reverse_survival_fertest_latin_america_x5.csv', 
+             file = 'outputs/reverse_survival_fertest_world_x5.csv', 
              row.names = F )
 
 ##################################################

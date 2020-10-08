@@ -46,7 +46,7 @@ data('pop')
 # select Latin America Locations with 90k+ population in 2020
 Locations <- 
   UNlocations %>% setDT %>%
-  .[ area_code == 904, 
+  .[ ,
      .( name, country_code, area_name, area_code ) ] %>%
   merge( 
     pop %>% setDT %>%
@@ -56,7 +56,9 @@ Locations <-
   .[ pop >= 90, ]
 
 # ommit Curacao - no data in server
-myLocations <- Locations[ country_code != 531 ]$country_code
+myLocations <- 
+  Locations[ !( country_code %in% c( 531, 180, 232, 422, 706, 830 ) ) & 
+               area_code != -1 ]$country_code
 
 # Loop through each location with `lapply`
 myPop <- 
@@ -126,55 +128,11 @@ myPop <-
 # Merge all separate country data frames into one data frame
 pop_data <- data.table( do.call( rbind, myPop ) )
 
+# write.table( pop_data, 
+#              file = 'data/latin_america_census_demodata_agex5_sex.csv',
+#              row.names = FALSE )
+
+
 write.table( pop_data, 
-             file = 'data/latin_america_census_demodata_agex5_sex.csv',
+             file = 'data/world_census_demodata_agex5_sex.csv',
              row.names = FALSE )
-
-Value <- pop5_mat[, 1]
-Value <- c(10000,44170,Value[-1])
-Age   <- sort(c(1,seq(0,100,by=5)))
-
-
-labs <- sort(
-  rep( c( 'Sprague', 'Beers', 'Beers_keep0' ),
-     101 ) )
-
-vals <- 
-  c( graduate(Value, Age, method = "beers(mod)"),
-     graduate(Value, Age, method = "beers(mod)", keep0=TRUE, johnson = TRUE),
-     graduate(Value, Age, method = "sprague", keep0=TRUE, johnson = TRUE) )
-
-length(vals)
-x = data.table( labs, vals, age = rep(0:100,3) )
-
-x %>% 
-  ggplot(  ) +
-  geom_line( data = x, aes( x = age, y = vals, color = labs ) ) +
-  #geom_point( data = data.table( Age, Value ), aes( x = Age, y = Value ) ) +
-  theme_classic()
-
-
-Age = resFilt[SeriesID == 	
-          15635377838 & SexID == 3 &
-          ( ( AgeStart == 0 & AgeEnd == 5 ) |
-              ( AgeStart == 5 & AgeEnd == 10 ) |
-              ( AgeStart == 10 & AgeEnd == 15 ) |
-              ( AgeStart == 0 & AgeEnd == 1 ) |
-              ( AgeStart == 1 & AgeEnd == 5 ) |
-              ( AgeStart >= 15 ) )]$AgeStart[-20]
-
-Value = resFilt[SeriesID == 	
-          15635377838 & SexID == 3 &
-          ( ( AgeStart == 0 & AgeEnd == 5 ) |
-              ( AgeStart == 5 & AgeEnd == 10 ) |
-              ( AgeStart == 10 & AgeEnd == 15 ) |
-              ( AgeStart == 0 & AgeEnd == 1 ) |
-              ( AgeStart == 1 & AgeEnd == 5 ) |
-              ( AgeStart > 15 ) )]$DataValue[-20]
-
-beersmod0 <- graduate(Value = c( 5000, 4500, 7000, 7000, 8000, 9000 ), 
-
-                      Age = c( 0, 5, 10, 15, 20, 25  ),
-                      method = "beers(mod)", johnson = TRUE)
-
-ref

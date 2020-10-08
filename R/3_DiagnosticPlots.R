@@ -52,9 +52,7 @@ wpp_tfr <-
         id.vars       = c( 'country_code', 'name' ),
         value.name    = 'tfr_wpp',
         variable.name = 'period' ) %>%
-  .[, period_mid := ( as.numeric( substr( period, 1, 4 ) ) +
-                        ( as.numeric( substr( period, 1, 4 ) ) - 
-                            as.numeric( substr( period, 6, 9 ) ) ) / 2 + 0.5 ) ] %>%
+  .[, period_mid := ( as.numeric( substr( period, 1, 4 ) ) + 2.5 ) ] %>%
   .[ , 
      .( LocID = country_code, 
         name, 
