@@ -45,7 +45,7 @@ data('pop')
 # select Latin America Locations with 90k+ population in 2020
 Locations <- 
   UNlocations %>% setDT %>%
-  .[ area_code == 904, 
+  .[ , 
      .( name, country_code, area_name, area_code ) ] %>%
   merge( 
     pop %>% setDT %>%
@@ -55,7 +55,9 @@ Locations <-
   .[ pop >= 90, ]
 
 # ommit Curacao - no data in server
-myLocations <- Locations[ country_code != 531 ]$country_code
+myLocations <- 
+  Locations[ !( country_code %in% c( 531, 158, 180, 232, 422, 706, 830 ) ) & 
+               area_code != -1 ]$country_code
 
 # Loop through each location with `lapply`
 myPop <- 
@@ -118,7 +120,7 @@ myPop <-
 pop_data <- data.table( do.call( rbind, myPop ) )
 
 write.table( pop_data, 
-             file = 'data/latin_america_census_demodata_agex1_sex.csv',
+             file = 'data/world_census_demodata_agex1_sex.csv',
              row.names = FALSE )
 
 ##################################################

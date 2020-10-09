@@ -40,7 +40,7 @@ source( 'R/aux_functions.R' )
 
 ### Read UNPD saved data #------------------------
 pop_data <- 
-  fread('data/latin_america_census_demodata_agex1_sex.csv') %>%
+  fread('data/world_census_demodata_agex1_sex.csv') %>%
   .[, SeriesID := as.numeric( SeriesID ) ]
              
 ##################################################
@@ -141,7 +141,7 @@ revsurv_selection <-
          all.x = TRUE )
 
 write.table( revsurv_selection,
-             file = 'outputs/selected_series_revsurv_latin_america.csv',
+             file = 'outputs/selected_series_revsurv_world.csv',
              row.names = FALSE )
 ##################################################
 
@@ -285,7 +285,7 @@ RevSurvEstimates <-
 
 outRevSurv <- do.call( rbind, RevSurvEstimates )
 
-write.table( outRevSurv, 'outputs/reverse_survival_fertest_latin_america_x1.csv', 
+write.table( outRevSurv, 'outputs/reverse_survival_fertest_world_x1.csv', 
              row.names = F )
 ##################################################
 

@@ -32,11 +32,11 @@ manual_rmv_ids_x5 <-
       .[ Remove == 'yes', ] )$SeriesID %>% as.numeric
 
 outRevSurvx5 <- 
-  fread( 'outputs/reverse_survival_fertest_latin_america_x5.csv' ) %>%
+  fread( 'outputs/reverse_survival_fertest_world_x5.csv' ) %>%
   .[ !( as.numeric( SeriesID ) %in% manual_rmv_ids_x5 ) ]
 
 outRevSurv <- 
-  fread( 'outputs/reverse_survival_fertest_latin_america_x1.csv' )
+  fread( 'outputs/reverse_survival_fertest_world_x1.csv' )
 
 
 
@@ -72,12 +72,12 @@ plot_outx5 <-
 
 plot_all <- 
   rbind(
-    wpp_tfr[, .( LocID, name, year, TFR, TypeEst = 'WPP 2019' ) ],
-    plot_out[, .( LocID, name, year, TFR, TypeEst = 'RevSurv (x1)' ) ],
-    plot_outx5[, .( LocID, name, year, TFR, TypeEst ) ]
+    wpp_tfr[, .( SeriesID = 0, LocID, name, year, TFR, TypeEst = 'WPP 2019' ) ],
+    plot_out[, .( SeriesID, LocID, name, year, TFR, TypeEst = 'RevSurv (x1)' ) ],
+    plot_outx5[, .( SeriesID, LocID, name, year, TFR, TypeEst ) ]
   )
 
-pdf( file = 'figs/outputs_revsurv_latin_america_x5.pdf', 
+pdf( file = 'figs/outputs_revsurv_world_x5.pdf', 
      width = 8, height = 6 )
 for( loc in sort( plot_all$LocID %>% unique ) ){
   
@@ -85,10 +85,12 @@ for( loc in sort( plot_all$LocID %>% unique ) ){
   
   title_name <- paste0( aux$name %>% unique, ' - ', loc )
   
-  if( loc == 740 ){
-    aux <- aux[ TFR < 20, ]
-  } else{
-    subt = ''
+  if( max( aux$TFR ) > 15 | min( aux$TFR ) < 0.5 ){
+    filterOutLier <- 
+      aux[ TFR > 15 | TFR < 0.5, ]$SeriesID %>%
+      unique
+    
+    aux <- aux[ !( SeriesID %in% filterOutLier ) ]
   }
   
   plot_this <- 
