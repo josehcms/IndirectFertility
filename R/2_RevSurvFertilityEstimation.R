@@ -289,3 +289,35 @@ write.table( outRevSurv, 'outputs/reverse_survival_fertest_world_x1.csv',
              row.names = F )
 ##################################################
 
+require(data.table);require(dplyr)
+aux1 <- fread('data/world_census_demodata_agex5_sex.csv') %>%
+  .[,.(SeriesID, LocID, LocName, LocTypeName, LocAreaTypeName, ## series ID charactr
+       SubGroupName,  SubGroupTypeName, SubGroupCombinationID, 
+       DataCatalogID, DataCatalogName, DataCatalogShortName, 
+       FieldWorkStart, FieldWorkMiddle, DataProcess, DataSourceName, 
+       DataSourceAuthor, DataSourceYear, DataSourceShortName, 
+       DataStatusName, StatisticalConceptName, DataTypeName, 
+       ModelPatternName, DataReliabilityName, PeriodTypeName, 
+       PeriodGroupName, TimeUnit, FootNoteID,
+       RegName, RegID, AreaName, AreaID, 
+       TimeStart, TimeMid, TimeLabel)] %>% unique
+
+aux <- 
+  fread('outputs/reverse_survival_fertest_world_x5.csv') %>%
+  merge( aux1,
+         by = c( 'LocID', 'SeriesID')) %>% 
+  .[,.(SeriesID, LocID, LocName, LocTypeName, LocAreaTypeName, ## series ID charactr
+       SubGroupName,  SubGroupTypeName, SubGroupCombinationID, 
+       DataCatalogID, DataCatalogName, DataCatalogShortName, 
+       FieldWorkStart, FieldWorkMiddle, DataProcess, DataSourceName, 
+       DataSourceAuthor, DataSourceYear, DataSourceShortName, 
+       DataStatusName, StatisticalConceptName, DataTypeName, 
+       ModelPatternName, DataReliabilityName, PeriodTypeName, 
+       PeriodGroupName, TimeUnit, FootNoteID,
+       RegName, RegID, AreaName, AreaID, 
+       TimeStart, TimeMid, TimeLabel, DateFormtd,year, TypeEst,
+       TFR,births)]
+
+write.table( aux,
+             file = 'outputs/reverse_survival_fertest_world_x5.csv',
+             row.names = F )
