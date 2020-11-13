@@ -166,7 +166,7 @@ set_dummy_children <-
     return( out_dt )
   }
 
-child_data_unesco <- 
+child_list_unesco <- 
   lapply( pop_data$SeriesID %>% unique,
           function( x ){
             
@@ -185,7 +185,15 @@ child_data_unesco <-
           })
 
 child_data_unesco <- 
-  data.table( do.call( rbind, child_data_unesco ) )
+  data.table( do.call( rbind, child_list_unesco ) ) %>%
+  merge(
+    pop_data[ ,.( LocID, SeriesID, LocName, DataCatalogID, DataCatalogName, 
+                  DataCatalogShortName, DataSourceName, 
+                  DataSourceAuthor, DataSourceYear, 
+                  DataSourceShortName ) ] %>% unique,
+    by = c( 'LocID', 'SeriesID' )
+  )
+
 
 write.table( child_data_unesco, 
              file = 'data/world_unesco_demodata_children_age.csv',
