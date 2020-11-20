@@ -103,23 +103,32 @@ pop_females <-
 
 # check countries with multiples IDs for same year
 
-select_uniqueID <- 
-  pop_females[,.( SeriesID, LocID, TimeLabel ) ] %>%
-  unique %>%
-  .[, .N, .( LocID, TimeLabel ) ] %>%
-  setorder( LocID, TimeLabel ) 
-
-pop_females <- 
-  pop_females %>%
-  merge(
-    select_uniqueID,
-    by = c( 'LocID', 'TimeLabel' )
-  ) %>%
-  .[ N == 1, ]
+# select_uniqueID <- 
+#   pop_females[,.( SeriesID, LocID, TimeLabel ) ] %>%
+#   unique %>%
+#   .[, .N, .( LocID, TimeLabel ) ] %>%
+#   setorder( LocID, TimeLabel ) 
+# 
+# pop_females <- 
+#   pop_females %>%
+#   merge(
+#     select_uniqueID,
+#     by = c( 'LocID', 'TimeLabel' )
+#   ) %>%
+#   .[ N == 1, ]
 
 ##################################################
 
 ### Select child data #---------------------------
+
+# Series UNESCO to female pop data
+pop_females <- 
+  pop_females %>%
+  merge(
+    pop_child[, .( LocID, SeriesID_UNESCO = SeriesID, 
+                   TimeLabel ) ] %>% unique,
+    by = c( 'LocID', 'TimeLabel' )
+  )
 
 # Match LocID and TimeLabel from women data
 filter_child <- 
@@ -137,135 +146,143 @@ pop_child <-
   setorder( LocID, SeriesID, Age ) %>%
   merge(
     pop_child[ ,.( SeriesID, 
-                   DateFormtd = date_decimal( TimeMid ) ) ] %>% unique,
+                   DateFormtd = as.Date( date_decimal( TimeMid ) ) ) ] %>% unique,
     by = 'SeriesID'
   )
 ##################################################
 
 ### Apply reverse survival to Series #------------
 
-seriesUnesco <- 
-  filter_child[ ,.( SeriesID, LocID, TimeLabel ) ] %>% unique
-
 pop_females <- 
-  pop_females[ , .( LocID, TimeLabel, DateFormtd, Age, pop_w ) ] %>%
-  merge(
-    seriesUnesco,
-    by = c( 'LocID', 'TimeLabel' )
-  )
+  pop_females[ , .( SeriesID, SeriesID_UNESCO,
+                    LocID, TimeLabel, DateFormtd,
+                    Age, pop_w ) ] 
 
-series <- pop_females$SeriesID %>% unique
+series_unesco <- pop_females$SeriesID_UNESCO %>% unique
 
 RevSurvEstimates <- 
-  lapply( series, function( x ){
+  lapply( series_unesco, function( x ){
     
     aux_c <- pop_child[ SeriesID == x ] 
-    aux_f <- pop_females[ SeriesID == x ]
+    aux_f1 <- pop_females[ SeriesID_UNESCO == x ]
     
-    if( !is_age_sequential( aux_c$Age ) | !is_age_sequential( aux_f$Age )  ){
-      paste0( 'SeriesID number ', x, ' not in sequencial age format!!!')
-    }
+    outRevSurv <- data.table()
     
-    date_ref <- as.Date( unique( aux_c$DateFormtd ) )
-    date_ref_dec <- decimal_anydate( date_ref ) # reference date in decimal
-    loc <- aux_c$LocID %>% unique
-    
-    popx5_w = aux_f$pop_w
-    ages5_w = aux_f$Age %>% unique
-    popx1_c = aux_c$pop_c
-    ages1_c = aux_c$Age %>% unique
-    
-    # 1) get child 0-5 mortality probability for reference period
-    #    reference period - 5 and reference period - 10
-    ltb_ref <- getWPP2019LT( locations = loc,
-                             year = date_ref_dec,
-                             sex = 'both' )
-    ltb_ref5 <- getWPP2019LT( locations = loc,
-                              year = ( date_ref_dec - 5 ),
-                              sex = 'both' )
-    ltb_ref10 <- getWPP2019LT( locations = loc,
-                               year = ( date_ref_dec - 10 ),
+    for( s_fem in aux_f1$SeriesID %>% unique ){
+      
+      aux_f <- 
+        aux_f1[ SeriesID == s_fem ]
+      
+      if( !is_age_sequential( aux_c$Age ) | !is_age_sequential( aux_f$Age )  ){
+        paste0( 'SeriesID number ', x, ' not in sequencial age format!!!')
+      }
+      
+      date_ref <- as.Date( unique( aux_c$DateFormtd ) )
+      date_ref_dec <- decimal_anydate( date_ref ) # reference date in decimal
+      loc <- aux_c$LocID %>% unique
+      
+      popx5_w = aux_f$pop_w
+      ages5_w = aux_f$Age %>% unique
+      popx1_c = aux_c$pop_c
+      ages1_c = aux_c$Age %>% unique
+      
+      # 1) get child 0-5 mortality probability for reference period
+      #    reference period - 5 and reference period - 10
+      ltb_ref <- getWPP2019LT( locations = loc,
+                               year = date_ref_dec,
                                sex = 'both' )
-    
-    q1  <-  
-      ( ltb_ref$lx[ ltb_ref$x == 0 ] - ltb_ref$lx[ ltb_ref$x == 5 ] ) /
-      ltb_ref$lx[ ltb_ref$x == 0 ]
-    q2  <-  
-      ( ltb_ref5$lx[ ltb_ref5$x == 0 ] - ltb_ref5$lx[ ltb_ref5$x == 5 ] ) /
-      ltb_ref5$lx[ ltb_ref5$x == 0 ]
-    q3  <-  
-      ( ltb_ref10$lx[ ltb_ref10$x == 0 ] - ltb_ref10$lx[ ltb_ref10$x == 5 ] ) /
-      ltb_ref10$lx[ ltb_ref10$x == 0 ]
-    
-    q0_5 <- c( q1, q2, q3 )
-    
-    # 2) get female q15_45 mortality probability for 
-    # reference period(q1f), reference period - 5 (q2f), and reference period - 10 (q3f)
-    
-    ltf_ref <- getWPP2019LT( locations = loc,
-                             year = date_ref_dec,
-                             sex = 'female' )
-    ltf_ref5 <- getWPP2019LT( locations = loc,
-                              year = ( date_ref_dec - 5 ),
-                              sex = 'female' )
-    ltf_ref10 <- getWPP2019LT( locations = loc,
-                               year = ( date_ref_dec - 10 ),
+      ltb_ref5 <- getWPP2019LT( locations = loc,
+                                year = ( date_ref_dec - 5 ),
+                                sex = 'both' )
+      ltb_ref10 <- getWPP2019LT( locations = loc,
+                                 year = ( date_ref_dec - 10 ),
+                                 sex = 'both' )
+      
+      q1  <-  
+        ( ltb_ref$lx[ ltb_ref$x == 0 ] - ltb_ref$lx[ ltb_ref$x == 5 ] ) /
+        ltb_ref$lx[ ltb_ref$x == 0 ]
+      q2  <-  
+        ( ltb_ref5$lx[ ltb_ref5$x == 0 ] - ltb_ref5$lx[ ltb_ref5$x == 5 ] ) /
+        ltb_ref5$lx[ ltb_ref5$x == 0 ]
+      q3  <-  
+        ( ltb_ref10$lx[ ltb_ref10$x == 0 ] - ltb_ref10$lx[ ltb_ref10$x == 5 ] ) /
+        ltb_ref10$lx[ ltb_ref10$x == 0 ]
+      
+      q0_5 <- c( q1, q2, q3 )
+      
+      # 2) get female q15_45 mortality probability for 
+      # reference period(q1f), reference period - 5 (q2f), and reference period - 10 (q3f)
+      
+      ltf_ref <- getWPP2019LT( locations = loc,
+                               year = date_ref_dec,
                                sex = 'female' )
-    
-    q1f  <-  
-      ( ltf_ref$lx[ ltf_ref$x == 15 ] - ltf_ref$lx[ ltf_ref$x == 45 ] ) /
-      ltf_ref$lx[ ltf_ref$x == 15 ]
-    q2f  <-  
-      ( ltf_ref5$lx[ ltf_ref5$x == 15 ] - ltf_ref5$lx[ ltf_ref5$x == 45 ] ) /
-      ltf_ref5$lx[ ltf_ref5$x == 15 ]
-    q3f  <-  
-      ( ltf_ref10$lx[ ltf_ref10$x == 15 ] - ltf_ref10$lx[ ltf_ref10$x == 45 ] ) /
-      ltf_ref10$lx[ ltf_ref10$x == 15 ]
-    
-    q15_45f <- c( q1f, q2f, q3f )
-    
-    # 3) get female lx5 values matching ages
-    lx5_w <- ltf_ref$lx[ ltf_ref$x %in% ages5_w ]
-    
-    # 4) get children lx1 values matching ages using ungroup pclm function
-    lts_model <- pclm( x = ltb_ref$x[ 2:22 ],
-                       y = ltb_ref$dx[ 2:22 ],
-                       nlast = 1,
-                       offset = ltb_ref$Lx[ 2:22 ] )
-    lts <-
-      LifeTable( x = 0:99,
-                 mx = c( ltb_ref$mx[1], fitted( lts_model )[ 1:99 ] ),
-                 lx0 = 1,
-                 sex = 'total' )$lt
-    
-    lx1_c <- lts$lx[ lts$x %in% 0:15 ]
-    
-    # 5) get fertility profile for current year and previous 15 period
-    
-    asfr <- FetchFertilityWpp2019( locations = loc,
-                                   year =  date_ref_dec )$asfr
-    
-    if( ( date_ref_dec - 15 ) < 1950 ){
-      asfr_15prior <- asfr
-    } else{
-      asfr_15prior <- FetchFertilityWpp2019( locations = loc,
-                                             year = ( date_ref_dec - 15 ) )$asfr
+      ltf_ref5 <- getWPP2019LT( locations = loc,
+                                year = ( date_ref_dec - 5 ),
+                                sex = 'female' )
+      ltf_ref10 <- getWPP2019LT( locations = loc,
+                                 year = ( date_ref_dec - 10 ),
+                                 sex = 'female' )
+      
+      q1f  <-  
+        ( ltf_ref$lx[ ltf_ref$x == 15 ] - ltf_ref$lx[ ltf_ref$x == 45 ] ) /
+        ltf_ref$lx[ ltf_ref$x == 15 ]
+      q2f  <-  
+        ( ltf_ref5$lx[ ltf_ref5$x == 15 ] - ltf_ref5$lx[ ltf_ref5$x == 45 ] ) /
+        ltf_ref5$lx[ ltf_ref5$x == 15 ]
+      q3f  <-  
+        ( ltf_ref10$lx[ ltf_ref10$x == 15 ] - ltf_ref10$lx[ ltf_ref10$x == 45 ] ) /
+        ltf_ref10$lx[ ltf_ref10$x == 15 ]
+      
+      q15_45f <- c( q1f, q2f, q3f )
+      
+      # 3) get female lx5 values matching ages
+      lx5_w <- ltf_ref$lx[ ltf_ref$x %in% ages5_w ]
+      
+      # 4) get children lx1 values matching ages using ungroup pclm function
+      lts_model <- pclm( x = ltb_ref$x[ 2:22 ],
+                         y = ltb_ref$dx[ 2:22 ],
+                         nlast = 1,
+                         offset = ltb_ref$Lx[ 2:22 ] )
+      lts <-
+        LifeTable( x = 0:99,
+                   mx = c( ltb_ref$mx[1], fitted( lts_model )[ 1:99 ] ),
+                   lx0 = 1,
+                   sex = 'total' )$lt
+      
+      lx1_c <- lts$lx[ lts$x %in% 0:15 ]
+      
+      # 5) get fertility profile for current year and previous 15 period
+      
+      asfr <- FetchFertilityWpp2019( locations = loc,
+                                     year =  date_ref_dec )$asfr
+      
+      if( ( date_ref_dec - 15 ) < 1950 ){
+        asfr_15prior <- asfr
+      } else{
+        asfr_15prior <- FetchFertilityWpp2019( locations = loc,
+                                               year = ( date_ref_dec - 15 ) )$asfr
+      }
+      
+      
+      # 6) run function
+      cat( 'Country:', loc )
+      outRevSurv <- 
+        rbind(
+          outRevSurv,
+          data.table(
+            LocID = loc,
+            SeriesID = x,
+            SeriesIDfem = s_fem,
+            DateFormtd = date_ref,
+            FertRevSurv( ages1_c, popx1_c, ages5_w, popx5_w, lx1_c, lx5_w,
+                         asfr, asfr_15prior,
+                         q0_5, q15_45f, date_ref )
+          )
+        )
     }
-    
-    
-    # 6) run function
-    cat( 'Country:', loc )
-    outRevSurv <- 
-      data.table(
-        LocID = loc,
-        SeriesID = x,
-        DateFormtd = date_ref,
-        FertRevSurv( ages1_c, popx1_c, ages5_w, popx5_w, lx1_c, lx5_w,
-                     asfr, asfr_15prior,
-                     q0_5, q15_45f, date_ref )
-      )
     
     return( outRevSurv )
+    
   } )
 
 outRevSurv <- do.call( rbind, RevSurvEstimates )
@@ -281,6 +298,6 @@ outRevSurv <-
   ) %>%
   .[ Dummy == FALSE ]
 
-write.table( outRevSurv, 'outputs/reverse_survival_fertest_world_unesco.csv', 
+write.table( outRevSurv, 'outputs/reverse_survival_fertest_world_unesco_all.csv', 
              row.names = F )
 ##################################################

@@ -36,10 +36,11 @@ outRevSurvx5 <-
   .[ !( as.numeric( SeriesID ) %in% manual_rmv_ids_x5 ) ]
 
 outRevSurv <- 
-  fread( 'outputs/reverse_survival_fertest_world_x1.csv' )
+  fread( 'outputs/reverse_survival_fertest_world_unesco_popwpp.csv' )
 
 outRevSurvUnesco <- 
-  fread( 'outputs/reverse_survival_fertest_world_unesco.csv' )
+  fread( 'outputs/reverse_survival_fertest_world_unesco_all.csv' )
+
 
 data('tfr')
 
@@ -79,16 +80,18 @@ plot_outUnesco <-
 plot_all <- 
   rbind(
     wpp_tfr[, .( SeriesID = 0, LocID, name, year, TFR, TypeEst = 'WPP 2019' ) ],
-    plot_out[, .( SeriesID, LocID, name, year, TFR, TypeEst = 'RevSurv (x1)' ) ],
-    plot_outUnesco[, .( SeriesID, LocID, name, year, TFR, TypeEst = 'UNESCO' ) ],
+    plot_out[, .( SeriesID, LocID, name, year, TFR, TypeEst = 'UNESCO-WPP' ) ],
+    plot_outUnesco[, .( SeriesID, LocID, name, year, TFR, TypeEst = 'UNESCO-Demodata' ) ],
     plot_outx5[, .( SeriesID, LocID, name, year, TFR, TypeEst ) ]
   )
 
-pdf( file = 'figs/outputs_revsurv_world_unesco.pdf', 
+pdf( file = 'figs/outputs_revsurv_world_unesco_all.pdf', 
      width = 8, height = 6 )
 for( loc in sort( plot_all$LocID %>% unique ) ){
   
-  aux <- plot_all[ LocID == loc & TypeEst %in% c( 'WPP 2019', 'UNESCO' ) ]
+  aux <- plot_all[ LocID == loc & TypeEst %in% c( 'WPP 2019', 
+                                                  'UNESCO-WPP', 
+                                                  'UNESCO-Demodata' ) ]
   
   title_name <- paste0( aux$name %>% unique, ' - ', loc )
   
@@ -118,20 +121,20 @@ for( loc in sort( plot_all$LocID %>% unique ) ){
                         breaks = seq( 1930, 2030, 10 ) ) +
     scale_color_manual( values = c( 'Abridged-BeersModified' = 'forestgreen',
                                     'Abridged-Sprague' = 'steelblue3',
-                                    'RevSurv (x1)'  = 'black',
-                                    'UNESCO'  = 'gray55',
+                                    'UNESCO-WPP'  = 'black',
+                                    'UNESCO-Demodata'  = 'gray55',
                                     'WPP 2019' = 'tomato3'),
                         name = '' ) +
     scale_shape_manual( values = c( 'Abridged-BeersModified' = 4,
                                     'Abridged-Sprague' = 1,
-                                    'RevSurv (x1)'  = 18,
-                                    'UNESCO'   = 16,
+                                    'UNESCO-WPP'  = 18,
+                                    'UNESCO-Demodata'   = 16,
                                     'WPP 2019' = 20 ),
                         name = '' ) +
     scale_linetype_manual( values = c( 'Abridged-BeersModified' = 'blank',
                                        'Abridged-Sprague' = 'blank',
-                                       'RevSurv (x1)'  = 'blank',
-                                       'UNESCO'  = 'blank',
+                                       'UNESCO-WPP'  = 'blank',
+                                       'UNESCO-Demodata'  = 'blank',
                                        'WPP 2019' = 'solid' ),
                         name = '' ) +
     labs( title = title_name,
