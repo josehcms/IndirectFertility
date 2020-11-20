@@ -112,3 +112,78 @@ getWPP2019LT <-
     return( lt_df )
     
   }
+
+# Deduplicates script
+
+## compute number of records per series/sex
+#DT[, count := .N, by=list(SeriesID, SexID)]
+## filter out series that are too incomplete (i.e., a typical age distribution by 5-year age group should have > 10 records up to age 50)
+#DT <- DT[count >= 10]
+
+deduplicates <- function(myDT) {     
+  
+  
+  
+  ## sort records per location and year to order multiple observation by multi-criteria using sort orders
+  
+  setorder(myDT, LocID, TimeMid, DataCatalogShortName,
+           
+           StatisticalConceptSort,
+           
+           DataStatusSort,
+           
+           DataProcessSort, DataProcessTypeSort,
+           
+           DataSourceSort, -DataSourceYear, DataSourceShortName,
+           
+           -DataTypeSort,
+           
+           DataReliabilitySort,
+           
+           ModelPatternName, PeriodGroupName, PeriodStart, PeriodSpan,
+           
+           SexSort, AgeStart, AgeSpan)
+  
+  
+  
+  ## subset key attributes to rank most authoritative series
+  
+  mySeries <- unique(myDT[, .(SeriesID, LocID, DataCatalogShortName, TimeMid, DataSourceShortName, DataSourceYear, DataSourceSort, DataStatusName, DataStatusSort, DataProcessSort, DataProcessTypeSort, StatisticalConceptName, StatisticalConceptSort, DataTypeName, DataTypeSort, DataReliabilityName, DataReliabilitySort)])
+  
+  
+  
+  setorder(mySeries, LocID, DataCatalogShortName,
+           
+           StatisticalConceptSort,
+           
+           DataStatusSort,
+           
+           DataProcessSort, DataProcessTypeSort,
+           
+           DataSourceSort, -DataSourceYear, DataSourceShortName,
+           
+           -DataTypeSort,
+           
+           DataReliabilitySort)
+  
+  
+  
+  ## assign rank to each set of "dups"
+  
+  mySeries[, nrank := 1:.N, by=list(LocID, DataCatalogShortName, trunc(TimeMid))]
+  
+  mySeries <- mySeries[nrank==1]
+  
+  
+  
+  ## keep only "best" version (top #1)
+  
+  myDT <- myDT[SeriesID %in% mySeries$SeriesID]
+  
+  return(myDT)
+  
+}
+
+#DT <- deduplicates(DT)
+
+############
