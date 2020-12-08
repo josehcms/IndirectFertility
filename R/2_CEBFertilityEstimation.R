@@ -2,13 +2,14 @@
 ### Title: Children Ever Born Estimation using
 ###        Demodata
 ### Author: Jose H C Monteiro da Silva
-### Last Update: 2020-12-07
+### Last Update: 2020-12-08
 ##################################################
 
 ### Set up packages and global options #----------
 
 # Clean environment 
 rm( list = ls( ) )
+t1 <- Sys.time()
 graphics.off( )
 
 # List of packages for session
@@ -42,11 +43,18 @@ source( 'R/aux_functions.R' )
 
 ### Read Demodata #-------------------------------
 ceb_data <- 
-  fread( 'data/world_ceb_demodata.csv' ) %>%
-  .[, SeriesID := as.numeric( SeriesID ) ] %>%
-  .[ AgeLabel %in% c( '40-44', '45-49', '50-54', '55-59',
-                      '60-64', '65-69', '70-74', '75-79' ) ] %>%
-  setorder( SeriesID, LocID, AgeStart )
+  rbind(
+    fread( 'data/world_ceb_demodata_x5.csv' ) %>%
+      .[, SeriesID := as.numeric( SeriesID ) ] %>%
+      .[ AgeLabel %in% c( '40-44', '45-49', '50-54', '55-59',
+                          '60-64', '65-69', '70-74', '75-79' ) ] %>%
+      setorder( SeriesID, LocID, AgeStart ),
+    fread( 'data/world_ceb_demodata_x1.csv' ) %>%
+      .[ , SeriesID := as.numeric( SeriesID ) ] %>%
+      .[ AgeLabel %in% paste0( 40:79 ) ] %>%
+      setorder( SeriesID, LocID, AgeStart )
+  )
+  
 
 # select series ids 
 ids <- 
@@ -342,4 +350,7 @@ for( loc in sort( plot_all$LocID %>% unique ) ){
 }
 dev.off()
 
+t2 <- Sys.time()
+
+print( t2 - t1 )
 ##################################################

@@ -64,21 +64,34 @@ myLocations <-
                                        408, 512, 531, 682, 
                                        732, 752, 826, 830  ) ) ]$country_code 
 
+myLocations <- 
+  Locations[ area_code != -1 & 
+               !( country_code %in% c( 0  ) ) ]$country_code 
 # Loop through each location with `lapply`
 myPop <- 
   lapply( myLocations, function(x) {
     
     cat("\nCountry", x, ":\n")
-    res <- get_recorddata(dataProcessTypeIds = c( 2, 11, 12, 8, 13, 4, 6 ), ## "Census"
-                          startYear = 1950,
-                          endYear = 2020,
-                          indicatorIds = 319,     
-                          ## "Mean children ever born by age of mother (and by sex of child): 319=Abridged, 369=Complete"
-                          # isComplete = 1,       ## 0=Abridged or 1=Complete
-                          locIds = x,             ## "Brazil"
-                          locAreaTypeIds = 2,     ## "Whole area"
-                          subGroupIds = 2,        ## "Total or All groups"
-                          includeUncertainty = FALSE )
+    
+    res <- 
+      tryCatch( 
+        get_recorddata(
+          dataProcessTypeIds = c( 2, 11, 12, 8, 13, 4, 6 ), ## "Census"
+          startYear = 1950,
+          endYear = 2020,
+          indicatorIds = 369,     ## "Mean children ever born by age of mother (and by sex of child): 319=Abridged, 369=Complete"
+          # isComplete = 1,       ## 0=Abridged or 1=Complete
+          locIds = x,             ## "Brazil"
+          locAreaTypeIds = 2,     ## "Whole area"
+          subGroupIds = 2,        ## "Total or All groups"
+          includeUncertainty = FALSE ),
+        error = function( e ) NULL )
+    
+    if( is.null( res ) ){
+      out <- data.table()
+      return( out )
+    }
+    
     setDT( res )
     
     # select specific variables and sort
@@ -87,7 +100,7 @@ myPop <-
           list( SeriesID, LocID, LocName, LocTypeName, LocAreaTypeName, ## series ID charactr
                 SubGroupName,  SubGroupTypeName, SubGroupCombinationID, 
                 DataCatalogID, DataCatalogName, DataCatalogShortName, 
-                FieldWorkStart, FieldWorkMiddle, 
+                FieldWorkStart, FieldWorkMiddle,  
                 DataProcessID, DataProcess, DataSourceName, 
                 DataSourceAuthor, DataSourceYear, DataSourceShortName, 
                 DataStatusName, StatisticalConceptName, DataTypeName, 
@@ -108,7 +121,7 @@ myPop <-
 pop_data <- data.table( do.call( rbind, myPop ) )
 
 write.table( pop_data, 
-             file = 'data/world_ceb_demodata_x5.csv',
+             file = 'data/world_ceb_demodata_x1.csv',
              row.names = FALSE )
 
 t2 <- Sys.time()
