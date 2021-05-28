@@ -1,7 +1,7 @@
 ##################################################
 ### Title: Plot estimates
 ### Author: Jose H C Monteiro da Silva
-### Last Update: 2020-09-17
+### Last Update: 2021-05-27
 ##################################################
 
 ### Set up packages and global options #----------
@@ -33,6 +33,10 @@ manual_rmv_ids_x5 <-
 
 outRevSurvx5 <- 
   fread( 'outputs/reverse_survival_fertest_world_x5.csv' ) %>%
+  .[ !( as.numeric( SeriesID ) %in% manual_rmv_ids_x5 ) ]
+
+outRevSurvx5_modified <-
+  fread( 'outputs/reverse_survival_fertest_world_x5_aggregated.csv' ) %>%
   .[ !( as.numeric( SeriesID ) %in% manual_rmv_ids_x5 ) ]
 
 outRevSurv <- 
@@ -72,6 +76,11 @@ plot_outx5 <-
   merge( wpp_tfr[, .( name, LocID ) ] %>% unique,
          by = 'LocID' )  
 
+plot_outx5_modified <- 
+  outRevSurvx5_modified %>% 
+  merge( wpp_tfr[, .( name, LocID ) ] %>% unique,
+         by = 'LocID' )
+
 plot_outUnesco <- 
   outRevSurvUnesco %>% 
   merge( wpp_tfr[, .( name, LocID ) ] %>% unique,
@@ -82,16 +91,15 @@ plot_all <-
     wpp_tfr[, .( SeriesID = 0, LocID, name, year, TFR, TypeEst = 'WPP 2019' ) ],
     plot_out[, .( SeriesID, LocID, name, year, TFR, TypeEst = 'UNESCO-WPP' ) ],
     plot_outUnesco[, .( SeriesID, LocID, name, year, TFR, TypeEst = 'UNESCO-Demodata' ) ],
-    plot_outx5[, .( SeriesID, LocID, name, year, TFR, TypeEst ) ]
+    plot_outx5[, .( SeriesID, LocID, name, year, TFR, TypeEst ) ],
+    plot_outx5_modified[, .( SeriesID, LocID, name, year, TFR, TypeEst = 'RevSurv-x5' ) ]
   )
 
-pdf( file = 'figs/outputs_revsurv_world_unesco_all.pdf', 
+pdf( file = 'figs/outputs_revsurv_world_all.pdf', 
      width = 8, height = 6 )
 for( loc in sort( plot_all$LocID %>% unique ) ){
   
-  aux <- plot_all[ LocID == loc & TypeEst %in% c( 'WPP 2019', 
-                                                  'UNESCO-WPP', 
-                                                  'UNESCO-Demodata' ) ]
+  aux <- plot_all[ LocID == loc ]
   
   title_name <- paste0( aux$name %>% unique, ' - ', loc )
   
@@ -123,19 +131,22 @@ for( loc in sort( plot_all$LocID %>% unique ) ){
                                     'Abridged-Sprague' = 'steelblue3',
                                     'UNESCO-WPP'  = 'black',
                                     'UNESCO-Demodata'  = 'gray55',
-                                    'WPP 2019' = 'tomato3'),
+                                    'WPP 2019' = 'tomato3',
+                                    'RevSurv-x5' = 'gold' ),
                         name = '' ) +
     scale_shape_manual( values = c( 'Abridged-BeersModified' = 4,
                                     'Abridged-Sprague' = 1,
                                     'UNESCO-WPP'  = 18,
                                     'UNESCO-Demodata'   = 16,
-                                    'WPP 2019' = 20 ),
+                                    'WPP 2019' = 20,
+                                    'RevSurv-x5' = 19 ),
                         name = '' ) +
     scale_linetype_manual( values = c( 'Abridged-BeersModified' = 'blank',
                                        'Abridged-Sprague' = 'blank',
                                        'UNESCO-WPP'  = 'blank',
                                        'UNESCO-Demodata'  = 'blank',
-                                       'WPP 2019' = 'solid' ),
+                                       'WPP 2019' = 'solid',
+                                       'RevSurv-x5' = 'blank' ),
                         name = '' ) +
     labs( title = title_name,
           y = 'TFR', 
