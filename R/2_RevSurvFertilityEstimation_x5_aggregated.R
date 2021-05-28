@@ -262,29 +262,16 @@ RevSurvEstimatesX5 <-
     popx5_c = aux_c$pop_c
     ages5_c = aux_c$Age %>% unique
     
-    # 1) get child 0-5 mortality probability for reference period
-    #    reference period - 5 and reference period - 10
+    # 1) get reference life table for children nLx
     ltb_ref <- getWPP2019LT( locations = loc,
                              year = date_ref_dec,
                              sex = 'both' )
-    ltb_ref5 <- getWPP2019LT( locations = loc,
-                              year = ( date_ref_dec - 5 ),
-                              sex = 'both' )
-    ltb_ref10 <- getWPP2019LT( locations = loc,
-                               year = ( date_ref_dec - 10 ),
-                               sex = 'both' )
     
-    q1  <-  
-      ( ltb_ref$lx[ ltb_ref$x == 0 ] - ltb_ref$lx[ ltb_ref$x == 5 ] ) /
-      ltb_ref$lx[ ltb_ref$x == 0 ]
-    q2  <-  
-      ( ltb_ref5$lx[ ltb_ref5$x == 0 ] - ltb_ref5$lx[ ltb_ref5$x == 5 ] ) /
-      ltb_ref5$lx[ ltb_ref5$x == 0 ]
-    q3  <-  
-      ( ltb_ref10$lx[ ltb_ref10$x == 0 ] - ltb_ref10$lx[ ltb_ref10$x == 5 ] ) /
-      ltb_ref10$lx[ ltb_ref10$x == 0 ]
+    nLx_c = c( sum( ltb_ref[ ltb_ref$x %in% c( 0, 1 ), ]$Lx ),
+               ltb_ref[ ltb_ref$x == 5, ]$Lx,
+               ltb_ref[ ltb_ref$x ==10, ]$Lx )
     
-    q0_5 <- c( q1, q2, q3 )
+    l0_c = 1 
     
     # 2) get female q15_45 mortality probability for 
     # reference period(q1f), reference period - 5 (q2f), and reference period - 10 (q3f)
@@ -314,20 +301,7 @@ RevSurvEstimatesX5 <-
     # 3) get female lx5 values matching ages
     lx5_w <- ltf_ref$lx[ ltf_ref$x %in% ages5_w ]
     
-    # 4) get children lx1 values matching ages using ungroup pclm function
-    lts_model <- pclm( x = ltb_ref$x[ 2:22 ],
-                       y = ltb_ref$dx[ 2:22 ],
-                       nlast = 1,
-                       offset = ltb_ref$Lx[ 2:22 ] )
-    lts <-
-      LifeTable( x = 0:99,
-                 mx = c( ltb_ref$mx[1], fitted( lts_model )[ 1:99 ] ),
-                 lx0 = 1,
-                 sex = 'total' )$lt
-    
-    lx1_c <- lts$lx[ lts$x %in% 0:15 ]
-    
-    # 5) get fertility profile for current year and previous 15 period
+    # 4) get fertility profile for current year and previous 15 period
     
     asfr <- FetchFertilityWpp2019( locations = loc,
                                    year =  date_ref_dec )$asfr
@@ -340,7 +314,7 @@ RevSurvEstimatesX5 <-
     }
     
     
-    # 6) run function
+    # 5) run function
     cat( 'Country:', loc )
     outRevSurv <- 
       data.table(
@@ -348,15 +322,16 @@ RevSurvEstimatesX5 <-
         SeriesID = x,
         DateFormtd = date_ref,
         FertRevSurvx5c( 
-          ages5_c, popx5_c, ages5_w, popx5_w, lx1_c, lx5_w,
+          ages5_c, popx5_c, ages5_w, popx5_w, 
+          nLx_c, l0_c, lx5_w,
           asfr, asfr_15prior,
-          q0_5, q15_45f, date_ref )
+          q15_45f, date_ref )
       )
     
     return( outRevSurv )
   } )
 
-outRevSurvx5<- do.call( rbind, RevSurvEstimatesX5 )
+outRevSurvx5 <- do.call( rbind, RevSurvEstimatesX5 )
 
 write.table( outRevSurvx5, 
              file = 'outputs/reverse_survival_fertest_world_x5_aggregated.csv', 
