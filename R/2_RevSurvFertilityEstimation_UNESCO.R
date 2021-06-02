@@ -224,13 +224,13 @@ RevSurvEstimates <-
                                  sex = 'female' )
       
       q1f  <-  
-        ( ltf_ref$lx[ ltf_ref$x == 15 ] - ltf_ref$lx[ ltf_ref$x == 45 ] ) /
+        ( ltf_ref$lx[ ltf_ref$x == 15 ] - ltf_ref$lx[ ltf_ref$x == 60 ] ) /
         ltf_ref$lx[ ltf_ref$x == 15 ]
       q2f  <-  
-        ( ltf_ref5$lx[ ltf_ref5$x == 15 ] - ltf_ref5$lx[ ltf_ref5$x == 45 ] ) /
+        ( ltf_ref5$lx[ ltf_ref5$x == 15 ] - ltf_ref5$lx[ ltf_ref5$x == 60 ] ) /
         ltf_ref5$lx[ ltf_ref5$x == 15 ]
       q3f  <-  
-        ( ltf_ref10$lx[ ltf_ref10$x == 15 ] - ltf_ref10$lx[ ltf_ref10$x == 45 ] ) /
+        ( ltf_ref10$lx[ ltf_ref10$x == 15 ] - ltf_ref10$lx[ ltf_ref10$x == 60 ] ) /
         ltf_ref10$lx[ ltf_ref10$x == 15 ]
       
       q15_45f <- c( q1f, q2f, q3f )

@@ -1,0 +1,84 @@
+---
+title: "Reverse Survival x5"
+author: "Jose H C Monteiro da Silva, Helena C Castanheira"
+date: "2021-06-02"
+output: word_document
+bibliography: bibliography.bib
+---
+
+# Reverse Survival x5 version
+
+In this short note we present the differences between the original version and the x5 version of the Reverse Survival method implemented in the package *fertestr*. 
+
+The original version (let's call it x1) reconstructs the TFRs and birth counts (we call it $B^t$) for 15 points in time preceeding the date of inquiry each one corresponding to each single age of children's population count input (for ages 0 to 14). In the x5 version, we reconstruct the TFRs and $B^t$ for each five year period before the inquiry based on population counts of children reported in five-year age groups (0-4, 5-9, 10-14). Therefore, the main difference of these two approaches lies in the reconstruction of $B^t$ through reverse survival. 
+
+In the x1 approach, the inputs for computing $B^t$ are: 1) population of children from 0-14 in single age groups, 2) a 'standard' survival function in single ages from ages 0 to 15 ($lx$), 3) estimates of child mortality probability for each three five year period preceding the inquiry ( $_5q_0^{t-2.5}$, $_5q_0^{t-7.5}$, $_5q_0^{t-12.5}$ ). The original version of the x1 approach [@moultrie_etal2013] uses the logit transformation of the standard survival function and the mortality probabilities of prior periods to retrieve survival functions and from them compute the "proportion of births occurring $x$ to $x+1$ years earlier that survive to the time of the inquiry, $c^L_x$". Details of this approach can be viewed in the spreadsheet attached to the method's explanation in [http://demographicestimation.iussp.org/content/estimation-fertility-reverse-survival](http://demographicestimation.iussp.org/content/estimation-fertility-reverse-survival).
+
+For the x5 alternative version, the inputs for computing $B^t$ are similar: 1) population counts of children reported in five-year age groups, 2) a 'standard' survival function for ages 5, 10 and 15 ($l_5,l_{10},l_{15}$ - $lx$ radix $l_0$ set to 1), 3) estimates of child mortality probability for each three five year period preceding the inquiry ( $_5q_0^{t-2.5}$, $_5q_0^{t-7.5}$, $_5q_0^{t-12.5}$ ). The estimation procedure of $c^L_x$ (proportion of births occurring $x$ to $x+5$ years earlier that survive to the time of the inquiry) for periods $ x = 2.5 $ (0-4 years earlier), $ x = 7.5 $ (5-9 years earlier) and $ x = 10-14 $ (10-14 years earlier) follow the same strategy of the the original x1 version of the method, and we will describe it bellow.
+
+## Step 1: From $_5q_0$, compute $\alpha^t$
+
+We compute the intercept $\alpha^t$ of the linear relation between logits of observed ($_5q_0$) and standard survival function ($l_5$) for each period preceding the inquiry. As @moultrie_etal2013, we set the slope values as $\beta = 1$. Therefore,
+
+$$ Yobs^t_x = \alpha^t + \beta * Ystd_x$$ 
+$$\alpha^t = Yobs^t_5 - Ystd_5. $$
+
+## Step 2: from standard $l_x$ and $\alpha$, compute $l_x^t$
+
+Then, by using the estimated $\alpha$ values, we can compute a set of survival functions $l_5, l_{10} and l_{15}$ for each period ealier than the date of inquiry:
+
+$$ l_x^t = \frac{1}{1 + \exp[2(\alpha^t + Ystd_x)]}.$$
+
+## Step 3: compute $_nL_x$
+
+Using estimated values for $l^t_5, l^t_{10} and l^t_{15}$ and $l^t_0 = 1$, we compute the person-years lived between ages $x$ and $x + 5$, for $x = 0$, $5$ and $10$:
+
+$$ _nL^t_x = 5 * l^t_{x+5} + _na_x * (l^t_x -l^t_{x+5}), $$
+where $_5a_0 = 0.50$, $_5a_5 = 2$ and $_5a_{10} = 2.5$ by default ( these values can be modified in the function).
+
+## Step 4: compute survivorship ratios $P_x^t$
+
+$$P_0^t = \frac{_5L_0^t}{5 l_0}$$
+
+$$P_5^t = \frac{_5L_5^t}{_5L_0^t}$$
+$$P_{10}^t = \frac{_5L_{10}^t}{_5L_5^t}$$
+
+## Step 5: define $S_x^t$ and compute $^cL_x$
+
+We compute $S_x^t$ as the survivorship ratio between ages $x$ and $x+5$ in periods $t$ equal 0-4, 5-9 and 10-14 before the inquiry.
+
+Then,
+
+$$ S_0^{0-4} = P_0^{0-4} $$
+
+$$ S_0^{0-4} = P_0^{0-4} $$
+
+$$ S_0^{5-9} = P_0^{5-9} $$
+
+$$ S_0^{10-14} = P_0^{10-14} $$
+
+$$ S_5^{0-4} = P_5^{0-4} $$
+
+$$ S_5^{5-9} = P_5^{5-9} $$
+
+$$ S_{10}^{0-4} = P_{10}^{0-4}, $$
+then:
+
+$$ ^cL_x = S_0^{x} S_5^{x-5} ... S_x^{0}, $$
+and
+
+$$ ^cL_0 = S_0^{0-4} = P_0^{0-4}$$
+
+$$ ^cL_5 = S_5^{0-4} S_0^{5-9} = P_5^{0-4} P_0^{5-9}$$
+
+$$ ^cL_{10} = S_{10}^{0-4} S_5^{5-9} S_0^{10-14} = P_{10}^{0-4} P_5^{5-9} P_0^{10-14}.$$
+
+## Step 6: reconstruct $B^t$
+
+$$ B^{x - 2.5} = \frac{ P_{0-4} } { 5 ^cL_0 }  $$
+
+$$ B^{x - 7.5} = \frac{ P_{5-9} } { 5 ^cL_5 }  $$
+
+$$ B^{x - 12.5} = \frac{ P_{10-14} } { 5 ^cL_{10} }  $$
+
+# References
