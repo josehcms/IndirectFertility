@@ -1,10 +1,10 @@
 ###################################################
 ### Title: Aux Functions for RevSurv estimation
 ### Author: Jose H C Monteiro da Silva
-### Last Update: 2020-09-17
+### Last Update: 2021-06-07
 ###################################################
 
-# Retrieve life table for location and year from WPP
+# 1) Retrieve life table for location and year from WPP (OLD)
 # mortality rates database
 
 getWPP2019LT <- 
@@ -12,7 +12,7 @@ getWPP2019LT <-
   
     require( wpp2019 )
     require( MortalityLaws )
-    require(fertestr)
+    require( fertestr )
     
     if ( !is.numeric( locations ) ){
       location_codes <- get_location_code( locations )
@@ -112,6 +112,71 @@ getWPP2019LT <-
     return( lt_df )
     
   }
+
+# 2) New function to retrieve life tables from WPP website
+# (medium variant)
+
+require( data.table )
+
+wpp_lt <- 
+  fread( 'https://population.un.org/wpp/Download/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2019_Life_Table_Medium.csv' )
+
+getLifeTableWPP <- 
+  function( locations = NULL, year, sex = 'Total' ){
+    
+    require( wpp2019 )
+    require( MortalityLaws )
+    require( fertestr )
+    require( dplyr )
+    
+    if ( !is.numeric( locations ) ){
+      location_codes <- get_location_code( locations )
+    } else {
+      location_codes <- locations
+    }
+    
+    sex_code <- 
+      dplyr::case_when(
+        sex == 'Total'  ~ 3,
+        sex == 'Male'   ~ 1,
+        sex == 'Female' ~ 2,
+      )
+    
+    base_lt <- 
+      wpp_lt[ , .( LocID, Location, 
+                   YearMid = MidPeriod,
+                   ReferencePeriod = Time,
+                   SexID, Sex, 
+                   AgeStart = AgeGrpStart, 
+                   mx, qx, 
+                   dx = dx / 100000,
+                   lx = lx / 100000, 
+                   ax, 
+                   Lx = Lx / 100000, 
+                   ex ) ]
+    
+    if( year < 1955.5 ){
+      year_sup <- 1955.5
+      year_inf <- 1950.5
+    } else{
+      year_interv <- findInterval( x = year, vec = seq( 1950.5, 2025.5, 5 ) )
+      year_sup <- seq( 1950.5, 2025.5, 5 )[ year_interv + 1 ]
+      year_inf <- seq( 1950.5, 2025.5, 5 )[ year_interv ]
+    }
+    
+    year_mid <- mean( c( year_sup, year_inf ) )
+    
+    lt_out <- 
+      base_lt[ LocID %in% location_codes &
+                 SexID == sex_code &
+                 YearMid == year_mid ] %>% 
+      copy
+    
+    return( lt_out )
+    
+  }
+
+
 
 # Deduplicates script
 
