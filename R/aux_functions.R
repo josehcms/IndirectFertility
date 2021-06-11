@@ -113,13 +113,22 @@ getWPP2019LT <-
     
   }
 
-# 2) New function to retrieve life tables from WPP website
+# 2) Interpolate
+interpolate <- function( y1, y2, x1, x2, x ){
+  y <- round( ( ( x - x1 ) / ( x2 - x1 ) ) * ( y2 - y1 ) + y1, 5 )
+  return( y )
+}
+
+# 3) New function to retrieve life tables from WPP website
 # (medium variant)
 
 require( data.table )
 
+# wpp_lt <- 
+#   fread( 'https://population.un.org/wpp/Download/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2019_Life_Table_Medium.csv' )
+
 wpp_lt <- 
-  fread( 'https://population.un.org/wpp/Download/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2019_Life_Table_Medium.csv' )
+  fread( 'data/WPP2019_LifeTables_MediumVariant.csv' )
 
 getLifeTableWPP <- 
   function( locations = NULL, year, sex = 'Total' ){
@@ -155,24 +164,85 @@ getLifeTableWPP <-
                    Lx = Lx / 100000, 
                    ex ) ]
     
-    if( year < 1955.5 ){
-      year_sup <- 1955.5
-      year_inf <- 1950.5
+    if( year < 1953 ){
+      
+      lt_out <- 
+        base_lt[ LocID %in% location_codes &
+                   SexID == sex_code &
+                   YearMid == 1953,
+                 .(
+                   LocID, Location, 
+                   ReferenceYear = year,
+                   ReferencePeriod = YearMid,
+                   SexID, Sex, 
+                   AgeStart, 
+                   x = AgeStart, 
+                   mx, qx, dx, lx, ax, Lx, ex
+                 )] %>% 
+        copy
+      
+      return( lt_out )
+    
     } else{
+      
       year_interv <- findInterval( x = year, vec = seq( 1950.5, 2025.5, 5 ) )
       year_sup <- seq( 1950.5, 2025.5, 5 )[ year_interv + 1 ]
       year_inf <- seq( 1950.5, 2025.5, 5 )[ year_interv ]
+      
+      if( abs( year - year_sup ) > abs( year - year_inf ) ){
+        year_mid1 <- mean( c( year_inf, year_inf - 5 ) )
+        year_mid2 <- mean( c( year_sup, year_inf ) )
+      } else{
+        year_mid1 <- mean( c( year_sup, year_inf ) )
+        year_mid2 <- mean( c( year_sup + 5, year_sup ) )
+      }
+      
+      lt_out1 <- 
+        base_lt[ LocID %in% location_codes &
+                   SexID == sex_code &
+                   YearMid == year_mid1 ] %>% 
+        copy
+      
+      lt_out2 <- 
+        base_lt[ LocID %in% location_codes &
+                   SexID == sex_code &
+                   YearMid == year_mid2 ] %>% 
+        copy
+      
+      ax_i <- interpolate( y1 = lt_out1$ax, x1 = year_mid1,
+                           y2 = lt_out2$ax, x2 = year_mid2,
+                           x = year )
+      
+      lx_i <- interpolate( y1 = lt_out1$lx, x1 = year_mid1,
+                           y2 = lt_out2$lx, x2 = year_mid2,
+                           x = year )
+      
+      locid   = lt_out1$LocID %>% unique
+      locname = lt_out1$Location %>% unique
+      sexid   = lt_out1$SexID %>% unique
+      sexname = lt_out1$Sex %>% unique
+      
+      lt_out <- 
+        LifeTable( x = lt_out1$AgeStart, 
+                   lx = lx_i,
+                   ax = ax_i, 
+                   sex = tolower( sex ),
+                   lx0 = 1 )$lt %>%
+        setDT %>%
+        .[ , .( LocID = locid, 
+                Location = locname,
+                ReferenceYear   = year,
+                ReferencePeriod = paste0( year_mid1,'-', year_mid2 ),
+                SexID = sexid, 
+                Sex = sexname, 
+                AgeStart = x, 
+                x,
+                mx, qx, dx, lx, ax, Lx, ex ) ]
+      
+      return( lt_out )
     }
     
-    year_mid <- mean( c( year_sup, year_inf ) )
     
-    lt_out <- 
-      base_lt[ LocID %in% location_codes &
-                 SexID == sex_code &
-                 YearMid == year_mid ] %>% 
-      copy
-    
-    return( lt_out )
     
   }
 

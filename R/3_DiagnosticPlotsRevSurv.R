@@ -1,7 +1,7 @@
 ##################################################
-### Title: Plot estimates
+### Title: Plot estimates from reverse survival
 ### Author: Jose H C Monteiro da Silva
-### Last Update: 2021-06-02
+### Last Update: 2021-06-11
 ##################################################
 
 ### Set up packages and global options #----------
@@ -32,30 +32,24 @@ manual_rmv_ids_x5 <-
       .[ Remove == 'yes', ] )$SeriesID %>% as.numeric
 
 outRevSurvx5_graduated <- 
-  fread( 'outputs/reverse_survival_fertest_world_x5_graduated.csv' ) %>%
+  fread( 'outputs/reverse_survival_fertestr_world_x5_graduated.csv' ) %>%
   .[ !( as.numeric( SeriesID ) %in% manual_rmv_ids_x5 ) ]
 
-outRevSurvx5_v1 <-
-  fread( 'outputs/reverse_survival_fertest_world_x5_aggregated.csv' ) %>%
+outRevSurvx5 <-
+  fread( 'outputs/reverse_survival_wppfunction_world_x5_abridged.csv' ) %>%
   .[ !( as.numeric( SeriesID ) %in% manual_rmv_ids_x5 ) ]
 
-outRevSurvx5_v2 <-
-  fread( 'outputs/reverse_survival_fertest_world_x5_aggregated_beta_amod.csv' ) %>%
-  .[ !( as.numeric( SeriesID ) %in% manual_rmv_ids_x5 ) ]
+outRevSurvUnesco <-
+  fread( 'outputs/reverse_survival_fertestr_world_unesco_wpp2019denominator.csv' )
 
 outRevSurvx1 <- 
-  fread( 'outputs/reverse_survival_fertest_world_x1.csv' )
-
-outRevSurvUnesco <- 
-  fread( 'outputs/reverse_survival_fertest_world_unesco_all.csv' )
-
+  fread( 'outputs/reverse_survival_fertestr_world_x1.csv' )
 
 data('tfr')
 
 myLocations <- 
   c( outRevSurvx5_graduated$LocID,
-     outRevSurvx5_v1$LocID,
-     outRevSurvx5_v2$LocID,
+     outRevSurvx5$LocID,
      outRevSurvx1$LocID,
      outRevSurvUnesco$LocID ) %>% unique %>% sort
 
@@ -85,13 +79,8 @@ plot_outx5_graduated <-
   merge( wpp_tfr[, .( name, LocID ) ] %>% unique,
          by = 'LocID' )  
 
-plot_outx5_v1 <- 
-  outRevSurvx5_v1 %>% 
-  merge( wpp_tfr[, .( name, LocID ) ] %>% unique,
-         by = 'LocID' )
-
-plot_outx5_v2 <- 
-  outRevSurvx5_v2 %>% 
+plot_outx5 <- 
+  outRevSurvx5 %>% 
   merge( wpp_tfr[, .( name, LocID ) ] %>% unique,
          by = 'LocID' )
 
@@ -104,12 +93,12 @@ plot_all <-
   rbind(
     wpp_tfr[, .( SeriesID = 0, LocID, name, year, TFR, TypeEst = 'WPP 2019' ) ],
     plot_outx1[, .( SeriesID, LocID, name, year, TFR, TypeEst = 'RevSurv-x1' ) ],
-    plot_outx5_graduated[, .( SeriesID, LocID, name, year, TFR, TypeEst ) ] %>%
-      .[ TypeEst == 'Abridged-BeersModified' ],
-    plot_outx5_v2[, .( SeriesID, LocID, name, year, TFR, TypeEst = 'RevSurv-x5' ) ]
+    plot_outx5_graduated[, .( SeriesID, LocID, name, year, TFR, TypeEst ) ],
+    plot_outx5[, .( SeriesID, LocID, name, year, TFR, TypeEst = 'RevSurv-x5 (Abridged)' ) ],
+    plot_outUnesco[, .( SeriesID, LocID, name, year, TFR, TypeEst = 'Educ Enrolment' ) ]
   )
 
-pdf( file = 'figs/outputs_revsurv_world_all_estimates_a.pdf', 
+pdf( file = 'figs/outputs_revsurv_world_estimates.pdf', 
      width = 8, height = 6 )
 for( loc in sort( plot_all$LocID %>% unique ) ){
   
@@ -143,27 +132,24 @@ for( loc in sort( plot_all$LocID %>% unique ) ){
     scale_x_continuous( limits = c( 1930, 2020 ), 
                         breaks = seq( 1930, 2030, 10 ) ) +
     scale_color_manual( values = c( 'Abridged-BeersModified' = 'forestgreen',
-                                    'Abridged-Sprague' = 'steelblue3',
-                                    'RevSurv-x5 (v1)'  = 'gold',
-                                    'RevSurv-x5'       = 'gold',
-                                    'RevSurv-x1'       = 'navy',
-                                    'UNESCO-Demodata'  = 'gray55',
-                                    'WPP 2019'         = 'tomato3' ),
+                                    'Abridged-Sprague'       = 'steelblue3',
+                                    'RevSurv-x5 (Abridged)'  = 'gold',
+                                    'RevSurv-x1'             = 'navy',
+                                    'Educ Enrolment'         = 'gray55',
+                                    'WPP 2019'               = 'tomato3' ),
                         name = '' ) +
     scale_shape_manual( values = c( 'Abridged-BeersModified' = 4,
-                                    'Abridged-Sprague'       = 1,
-                                    'RevSurv-x5 (v1)'        = 18,
-                                    'RevSurv-x5'             = 19,
+                                    'Abridged-Sprague'       = 3,
+                                    'RevSurv-x5 (Abridged)'  = 19,
                                     'RevSurv-x1'             = 1,
-                                    'UNESCO-Demodata'        = 16,
+                                    'Educ Enrolment'         = 16,
                                     'WPP 2019'               = 20 ),
                         name = '' ) +
     scale_linetype_manual( values = c( 'Abridged-BeersModified' = 'blank',
                                        'Abridged-Sprague'       = 'blank',
-                                       'RevSurv-x5 (v1)'        = 'blank',
-                                       'RevSurv-x5'             = 'blank',
+                                       'RevSurv-x5 (Abridged)'  = 'blank',
                                        'RevSurv-x1'             = 'blank',
-                                       'UNESCO-Demodata'        = 'blank',
+                                       'Educ Enrolment'         = 'blank',
                                        'WPP 2019'               = 'solid' ),
                            name = '' ) +
     labs( title = title_name,
@@ -184,6 +170,3 @@ for( loc in sort( plot_all$LocID %>% unique ) ){
 }
 dev.off()
 ##################################################
-
-plot_outx5_v2[ LocID == 112, 
-               .( SeriesID, LocID, name, year, TFR, TypeEst = 'RevSurv-x5' ) ]
