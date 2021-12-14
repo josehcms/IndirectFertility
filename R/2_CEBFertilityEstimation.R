@@ -92,7 +92,7 @@ ceb_list_shift <-
       year_svy - ( ages_w - 25 )
       
     t_ref_mac <- 
-      ifelse( t_ref_mac < 1950, 1950, t_ref_mac)
+      ifelse( t_ref_mac < 1950, 1950, t_ref_mac )
     
     mac <- 
       do.call(
